@@ -1,6 +1,8 @@
 package cn.lkpttxg.sept2.worldofzuul.core;
 
 
+import cn.lkpttxg.sept2.worldofzuul.core.moudle.Game;
+
 /**
  * 该类的主方法为程序入口，没有什么其它功能.
  *

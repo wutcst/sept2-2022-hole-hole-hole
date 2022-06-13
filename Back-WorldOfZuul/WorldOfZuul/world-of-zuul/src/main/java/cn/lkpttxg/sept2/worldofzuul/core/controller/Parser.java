@@ -1,7 +1,9 @@
 package cn.lkpttxg.sept2.worldofzuul.core.controller;
 
-import cn.edu.whut.sept.zuul.entity.Command;
-import cn.edu.whut.sept.zuul.entity.CommandWords;
+
+import cn.lkpttxg.sept2.worldofzuul.core.entity.Command;
+import cn.lkpttxg.sept2.worldofzuul.core.entity.CommandWords;
+
 import java.util.Scanner;
 
 /**
