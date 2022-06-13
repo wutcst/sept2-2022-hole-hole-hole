@@ -1,6 +1,7 @@
 package cn.lkpttxg.sept2.worldofzuul.core.entity;
 
-import cn.edu.whut.sept.zuul.enums.CommandWord;
+import cn.lkpttxg.sept2.worldofzuul.core.enums.CommandWord;
+
 import java.util.HashMap;
 
 /**
