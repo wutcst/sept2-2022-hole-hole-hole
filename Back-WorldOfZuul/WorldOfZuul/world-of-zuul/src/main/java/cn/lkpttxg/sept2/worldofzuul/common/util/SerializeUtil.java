@@ -19,7 +19,7 @@ public class SerializeUtil {
    * @param object 需要进行序列化的对象
    * @return 字符数组
    */
-  public static byte[] serizlize(Object object){
+  public byte[] serizlize(Object object){
     ObjectOutputStream oos = null;
     ByteArrayOutputStream baos = null;
     try {
@@ -51,7 +51,7 @@ public class SerializeUtil {
    * @param bytes 需要反序列化为对象的字节数组
    * @return 反序列化出的对象
    */
-  public static Object deserialize(byte[] bytes){
+  public Object deserialize(byte[] bytes){
     ByteArrayInputStream bais = null;
     ObjectInputStream ois = null;
     try{

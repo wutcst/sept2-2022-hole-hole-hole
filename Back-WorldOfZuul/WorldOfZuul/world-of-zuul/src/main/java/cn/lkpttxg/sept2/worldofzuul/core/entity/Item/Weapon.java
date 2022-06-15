@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class Weapon extends Item {
 
+  private static final long serialVersionUID = -8649276121917779517L;
   /**
    * 武器的攻击力
    */
@@ -20,9 +21,9 @@ public class Weapon extends Item {
    */
   private Integer durable;
 
-  public Weapon(Integer weight, String describe, String name, Integer weaponAttack,
+  public Weapon(String id, Integer weight, String describe, String name, Integer weaponAttack,
       Integer durable) {
-    super(weight, describe, name);
+    super(weight, describe, name, id);
     this.weaponAttack = weaponAttack;
     this.durable = durable;
   }

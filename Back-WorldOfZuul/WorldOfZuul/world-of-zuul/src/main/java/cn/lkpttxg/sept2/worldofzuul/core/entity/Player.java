@@ -16,6 +16,7 @@ import lombok.Data;
 @Data
 public class Player implements Serializable{
 
+  private static final long serialVersionUID = -8097775438557074550L;
   /**
    * 玩家id
    */
