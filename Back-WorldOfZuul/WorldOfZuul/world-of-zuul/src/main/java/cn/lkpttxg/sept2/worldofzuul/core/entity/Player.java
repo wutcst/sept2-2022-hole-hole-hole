@@ -28,11 +28,11 @@ public class Player implements Serializable{
   /**
    * 玩家金钱
    */
-  private String money;
+  private Integer money;
   /**
    * 玩家负重量
    */
-  private String weight;
+  private Integer weight;
   /**
    * 玩家背包
    */
@@ -66,7 +66,7 @@ public class Player implements Serializable{
    */
   private Integer health;
 
-  public Player(String id, String name, String money, String weight,
+  public Player(String id, String name, Integer money, Integer weight,
       HashMap<Item, Integer> bag, Room currentRoom,
       Stack<Room> oldRooms, Integer locX, Integer locY,
       Weapon weapon, Integer attack, Integer health) {
