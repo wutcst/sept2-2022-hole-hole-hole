@@ -1,5 +1,7 @@
 package cn.lkpttxg.sept2.worldofzuul.core.entity.Item;
 
+import cn.lkpttxg.sept2.worldofzuul.core.entity.Item.enums.TreasureTypes;
+import java.util.HashMap;
 import java.util.Objects;
 import lombok.Data;
 
@@ -22,5 +24,19 @@ public class Treasure extends Item {
       Integer value) {
     super(weight, describe, name, id);
     this.value = value;
+  }
+
+  /**
+   * 根据财宝种类构造对象
+   *
+   * @param treasureType 财宝种类
+   */
+  public Treasure(TreasureTypes treasureType){
+    HashMap<String, Object> map = treasureType.getAttribute();
+    super.setId((String)map.get("id"));
+    super.setName((String)map.get("name"));
+    super.setWeight((Integer) map.get("weight"));
+    super.setDescribe((String)map.get("describe"));
+    this.value = (Integer)map.get("value");
   }
 }
