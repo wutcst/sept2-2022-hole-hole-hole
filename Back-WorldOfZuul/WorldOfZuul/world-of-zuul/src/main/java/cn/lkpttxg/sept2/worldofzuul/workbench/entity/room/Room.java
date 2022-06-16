@@ -1,4 +1,4 @@
-package cn.lkpttxg.sept2.worldofzuul.core.entity;
+package cn.lkpttxg.sept2.worldofzuul.workbench.entity.room;
 
 import java.io.Serializable;
 

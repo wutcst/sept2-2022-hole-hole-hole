@@ -1,4 +1,4 @@
-package cn.lkpttxg.sept2.worldofzuul.core.entity.Item;
+package cn.lkpttxg.sept2.worldofzuul.workbench.entity.item;
 
 import java.io.Serializable;
 import java.util.Objects;

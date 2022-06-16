@@ -1,4 +1,4 @@
-package cn.lkpttxg.sept2.worldofzuul.workbench.controller;
+package cn.lkpttxg.sept2.worldofzuul.settings.web.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

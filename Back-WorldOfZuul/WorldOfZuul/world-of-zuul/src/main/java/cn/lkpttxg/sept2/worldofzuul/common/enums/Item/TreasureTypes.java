@@ -1,4 +1,4 @@
-package cn.lkpttxg.sept2.worldofzuul.core.entity.Item.enums;
+package cn.lkpttxg.sept2.worldofzuul.common.enums.Item;
 
 import java.util.HashMap;
 

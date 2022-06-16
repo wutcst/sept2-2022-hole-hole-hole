@@ -1,15 +1,13 @@
-package cn.lkpttxg.sept2.worldofzuul.core.dao;
+package cn.lkpttxg.sept2.worldofzuul.workbench.dao;
 
 import cn.lkpttxg.sept2.worldofzuul.common.util.SerializeUtil;
-import cn.lkpttxg.sept2.worldofzuul.core.entity.Item.Item;
-import cn.lkpttxg.sept2.worldofzuul.core.entity.Item.Weapon;
-import cn.lkpttxg.sept2.worldofzuul.core.entity.Player;
-import cn.lkpttxg.sept2.worldofzuul.core.entity.Room;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Weapon;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
 import java.util.HashMap;
 import java.util.Stack;
-import javax.annotation.Resource;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
+
 
 /**
  * 玩家类的dao

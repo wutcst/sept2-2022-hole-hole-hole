@@ -1,10 +1,9 @@
-package cn.lkpttxg.sept2.worldofzuul.core.entity;
+package cn.lkpttxg.sept2.worldofzuul.workbench.entity.player;
 
-import cn.lkpttxg.sept2.worldofzuul.core.entity.Item.Item;
-import cn.lkpttxg.sept2.worldofzuul.core.entity.Item.Weapon;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Weapon;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Stack;
 import lombok.Data;
 
 /**

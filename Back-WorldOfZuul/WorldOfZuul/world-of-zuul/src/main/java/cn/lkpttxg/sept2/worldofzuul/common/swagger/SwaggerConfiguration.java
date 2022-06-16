@@ -1,4 +1,4 @@
-package cn.lkpttxg.sept2.worldofzuul.settings.swagger;
+package cn.lkpttxg.sept2.worldofzuul.common.swagger;
 
 
 import org.springframework.context.annotation.Bean;

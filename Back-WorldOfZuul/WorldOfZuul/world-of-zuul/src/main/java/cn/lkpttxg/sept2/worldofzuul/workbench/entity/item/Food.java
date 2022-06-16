@@ -1,9 +1,8 @@
-package cn.lkpttxg.sept2.worldofzuul.core.entity.Item;
+package cn.lkpttxg.sept2.worldofzuul.workbench.entity.item;
 
-import cn.hutool.core.collection.CollUtil.Hash;
-import cn.lkpttxg.sept2.worldofzuul.core.entity.Item.enums.FoodTypes;
+import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.enums.FoodTypes;
 import java.util.HashMap;
-import java.util.Objects;
+
 import lombok.Data;
 
 /**
