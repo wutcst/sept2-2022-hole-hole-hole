@@ -7,7 +7,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
-	</parent>\
+	</parent>
 
 	<groupId>cn.lkpttxg.sept2</groupId>
 	<artifactId>world-of-zuul</artifactId>
@@ -45,6 +45,7 @@
 			<!--在引用时请在maven中央仓库搜索最新版本号-->
 			<version>2.0.4</version>
 		</dependency>
+    
 		<!--jdbc-->
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -56,18 +57,20 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>-->
-
+    
 		<!--工具类-->
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
 			<version>4.0.5</version>
 		</dependency>
+    
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
 		</dependency>
+    
 		<!--Swagger-->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -79,17 +82,21 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-bean-validators</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-		<!-- swagger-ui-bootstrap -->
+    
+		<!--swagger-ui-bootstrap-->
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>swagger-bootstrap-ui</artifactId>
 			<version>${swagger.bootstrap.version}</version>
 		</dependency>
+    
+
 		<!-- # 增加两个配置解决 NumberFormatException -->
 		<dependency>
 			<groupId>io.swagger</groupId>
@@ -100,6 +107,18 @@
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-models</artifactId>
 			<version>1.5.22</version>
+      
+    <!--redis-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+      
+    <!--lombok-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
 		</dependency>
 	</dependencies>
 
