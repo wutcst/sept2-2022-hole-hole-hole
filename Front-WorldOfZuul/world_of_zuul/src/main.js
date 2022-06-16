@@ -12,9 +12,6 @@ new Vue({
     store,
     router,
     render: h => h(App),
-    // watch:{
-    //     "$route":'CheckLogin'
-    // },
     created(){
         this.CheckLogin();
     },
@@ -29,3 +26,4 @@ new Vue({
         }
     }
 }).$mount('#app')
+

@@ -1,4 +1,12 @@
 server:
-  port: 8081
+  port: 80
   servlet:
     context-path: /worldOfZuul
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  redis:
+    host: localhost
+    port: 6379
+
