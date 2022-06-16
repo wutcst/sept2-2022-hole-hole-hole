@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Stack;
 import javax.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 /**
  * 玩家类的dao
@@ -16,11 +17,13 @@ import org.springframework.data.redis.core.RedisTemplate;
  * @author PpxiA
  */
 public class PlayerDao {
-  @Resource
   private RedisTemplate<String, byte[]> redisTemplate;
   // TODO: 依赖注入
   SerializeUtil sru = new SerializeUtil();
-
+  // TODO: redisTemplate无法注入
+  public PlayerDao(RedisTemplate redisTemplate){
+    this.redisTemplate = redisTemplate;
+  }
   /**
    * 创建玩家
    * @param player 玩家对象
