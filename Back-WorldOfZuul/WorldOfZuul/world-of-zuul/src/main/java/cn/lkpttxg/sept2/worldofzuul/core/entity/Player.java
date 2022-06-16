@@ -1,174 +1,87 @@
 package cn.lkpttxg.sept2.worldofzuul.core.entity;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import cn.lkpttxg.sept2.worldofzuul.core.entity.Item.Item;
+import cn.lkpttxg.sept2.worldofzuul.core.entity.Item.Weapon;
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Stack;
+import lombok.Data;
 
 /**
- * 玩家类，实例化游戏玩家，可为以后多玩家游戏搭建基础.
+ * 玩家类，包含玩家的基本属性
  *
- *@author txg
- * @version 2022.1.1
+ * @author PpxiA
+ * @version 1.0
  */
-public class Player {
-    private String name;
-    private float maxBearWeight;
-    private float nowWeight;
-    private Set<Item> items;
-    private Room currentRoom;
-    private Stack<Room> roomHistory;
+@Data
+public class Player implements Serializable{
 
-    /**
-     * 构造方法，实例化玩家类.
-     *
-     * @param name 玩家信息
-     * @param maxBearWeight 玩家最大承受重量
-     * @param nowWeight 玩家现在的承受重量
-     */
-    public Player(String name, float maxBearWeight, float nowWeight) {
-        this.name = name;
-        this.maxBearWeight = maxBearWeight;
-        this.nowWeight = nowWeight;
-        //初始化集合
-        items = new HashSet<>();
-        roomHistory = new Stack<>();
-    }
+  private static final long serialVersionUID = -8097775438557074550L;
+  /**
+   * 玩家id
+   */
+  private String id;
+  /**
+   * 玩家名字
+   */
+  private String name;
+  /**
+   * 玩家金钱
+   */
+  private Integer money;
+  /**
+   * 玩家负重量
+   */
+  private Integer weight;
+  /**
+   * 玩家背包
+   */
+  private HashMap<Item, Integer> bag;
+  /**
+   * 玩家当前房间
+   */
+  private Room currentRoom;
+  /**
+   * 玩家历史房间
+   */
+  private Stack<Room> oldRooms;
+  /**
+   * 玩家当前横坐标
+   */
+  private Integer locX;
+  /**
+   * 玩家当前纵坐标
+   */
+  private Integer locY;
+  /**
+   * 玩家当前持有的武器
+   */
+  private Weapon weapon;
+  /**
+   * 玩家的攻击力
+   */
+  private Integer attack;
+  /**
+   * 玩家的血量
+   */
+  private Integer health;
 
-
-    /**
-     * 添加物品.
-     *
-     * @param item 物品对象
-     * @return 可以添加为 true,不能添加为 flase
-     */
-    public boolean addItem(Item item) {
-        if (!isOver(item)) {
-            items.add(item);
-            nowWeight += item.getWeight();
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 判断加入某个物体后是否超重.
-     *
-     * @param item 物体对象
-     * @return 超重为true，否则为flase
-     */
-    public boolean isOver(Item item) {
-        return maxBearWeight < item.getWeight() + nowWeight;
-    }
-
-    /**
-     * 从玩家的物品列表中获取物品.
-     *
-     * @param name 物品名
-     * @return 如果物品存在，则返回该物品对象；否则返回 null
-     */
-    public Item getItem(String name) {
-       for (Item item : items) {
-           if (item.getName().equals(name)) {
-               return item;
-           }
-       }
-       return null;
-    }
-
-    /**
-     * 丢弃player身上的物品.
-     *
-     * @param item 丢弃物品
-     */
-   public void dropItem(Item item) {
-        items.remove(item);
-        nowWeight -= item.getWeight();
-   }
-
-    /**
-     * 展示Player身上所有的物品.
-     *
-     * @return 返回展示字符串
-     */
-   public String showItems() {
-       if (items.isEmpty()) {
-           return "你身上啥都没有" + '\n';
-       }
-       StringBuilder s = new StringBuilder("");
-       for (Item item : items) {
-           s.append(item.getName() + "\t" + item.getWeight() + "kg" + "\n");
-       }
-       return "你身上有:\n" + s.toString();
-   }
-
-    /**
-     * 完整的描述自己.
-     *
-     * @return 返回描述字段
-     */
-   public String getSelfLongDescription() {
-       return "姓名：" + name + "\n"
-               + "最大耐受量:" + maxBearWeight + "kg" + "\n"
-               + "目前耐受量:" + nowWeight + "kg" + "\n"
-               + "剩余耐受量:" + (maxBearWeight - nowWeight) + "kg" + "\n"
-               + "目前所在：" + getCurrentRoom().getShortDescription() + "\n"
-               + showItems();
-   }
-
-    //以下都是对属性字段的 getter 和 setter 方法
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public float getMaxBearWeight() {
-        return maxBearWeight;
-    }
-
-    public Set<Item> getItems() {
-        return items;
-    }
-
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    public Stack<Room> getRoomHistory() {
-        return roomHistory;
-    }
-
-    public float getNowWeight() {
-        return nowWeight;
-    }
-
-    public void setMaxBearWeight(float maxBearWeight) {
-        this.maxBearWeight = maxBearWeight;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {return true;}
-        if (o == null || getClass() != o.getClass()) {return false;}
-        Player player = (Player) o;
-        return Float.compare(player.maxBearWeight, maxBearWeight) == 0 &&
-                Float.compare(player.nowWeight, nowWeight) == 0 &&
-                Objects.equals(name, player.name) &&
-                Objects.equals(items, player.items) &&
-                Objects.equals(currentRoom, player.currentRoom) &&
-                Objects.equals(roomHistory, player.roomHistory);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, maxBearWeight, nowWeight, items, currentRoom, roomHistory);
-    }
+  public Player(String id, String name, Integer money, Integer weight,
+      HashMap<Item, Integer> bag, Room currentRoom,
+      Stack<Room> oldRooms, Integer locX, Integer locY,
+      Weapon weapon, Integer attack, Integer health) {
+    this.id = id;
+    this.name = name;
+    this.money = money;
+    this.weight = weight;
+    this.bag = bag;
+    this.currentRoom = currentRoom;
+    this.oldRooms = oldRooms;
+    this.locX = locX;
+    this.locY = locY;
+    this.weapon = weapon;
+    this.attack = attack;
+    this.health = health;
+  }
+  public Player(){}
 }
