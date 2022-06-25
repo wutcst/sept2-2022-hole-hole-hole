@@ -1,7 +1,9 @@
-package cn.lkpttxg.sept2.worldofzuul.workbench.entity.item;
+package cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items;
 
-import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.enums.WeaponTypes;
 import java.util.HashMap;
+
+import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.WeaponTypes;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
 import lombok.Data;
 
 /**

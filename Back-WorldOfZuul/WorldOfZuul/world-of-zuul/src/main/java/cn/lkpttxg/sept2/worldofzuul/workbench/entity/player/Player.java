@@ -1,10 +1,14 @@
 package cn.lkpttxg.sept2.worldofzuul.workbench.entity.player;
 
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
-import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Weapon;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Weapon;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Stack;
+
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
 import lombok.Data;
+
 
 /**
  * 玩家类，包含玩家的基本属性
