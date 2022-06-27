@@ -14,6 +14,7 @@ public interface UserMapper {
 
   /**
    * 插入一条用户记录
+   *
    * @param user 插入的用户数据
    * @return 改动记录数
    */
@@ -21,6 +22,7 @@ public interface UserMapper {
 
   /**
    * 通过密码和用户名查找用户
+   *
    * @param username 用户名
    * @param password 密码
    * @return 查找到的一条用户数据
@@ -29,7 +31,9 @@ public interface UserMapper {
 
   /**
    * 更新用户密码
+   *
    * @param userId 用户id
+   * @param password 用户密码
    * @return 改动记录数
    */
   int updatePasswordById(@Param("id") String userId, @Param("password") String password);

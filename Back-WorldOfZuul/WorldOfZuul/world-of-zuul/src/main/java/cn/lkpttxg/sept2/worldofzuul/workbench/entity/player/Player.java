@@ -35,11 +35,11 @@ public class Player implements Serializable{
   /**
    * 玩家金钱
    */
-  private Integer money;
+  private Integer money = 0;
   /**
    * 玩家负重量
    */
-  private Integer weight;
+  private Integer weight = 10;
   /**
    * 玩家背包
    */
@@ -55,11 +55,7 @@ public class Player implements Serializable{
   /**
    * 玩家当前横坐标
    */
-  private Integer locX;
-  /**
-   * 玩家当前纵坐标
-   */
-  private Integer locY;
+  private Integer loc = 12;
   /**
    * 玩家当前持有的武器
    */
@@ -67,9 +63,19 @@ public class Player implements Serializable{
   /**
    * 玩家的攻击力
    */
-  private Integer attack;
+  private Integer attack = 5;
   /**
    * 玩家的血量
    */
-  private Integer health;
+  private Integer health = 100;
+
+  /**
+   * 构造方法
+   * @param id 玩家id
+   * @param name 玩家名
+   */
+  public Player(String id, String name){
+    this.id = id;
+    this.name = name;
+  }
 }
