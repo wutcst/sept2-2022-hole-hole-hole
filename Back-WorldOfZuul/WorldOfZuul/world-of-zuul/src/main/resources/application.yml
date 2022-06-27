@@ -9,4 +9,14 @@ spring:
   redis:
     host: localhost
     port: 6379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://124.222.55.179:3306/worldofzuul
+    username: root
+    password: ll0304051X
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
