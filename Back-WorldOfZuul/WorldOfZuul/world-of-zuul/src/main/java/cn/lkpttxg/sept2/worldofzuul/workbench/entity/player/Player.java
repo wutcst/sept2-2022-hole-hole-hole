@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.Stack;
 
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -17,6 +19,8 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Player implements Serializable{
 
   private static final long serialVersionUID = -8097775438557074550L;
@@ -68,23 +72,4 @@ public class Player implements Serializable{
    * 玩家的血量
    */
   private Integer health;
-
-  public Player(String id, String name, Integer money, Integer weight,
-      HashMap<Item, Integer> bag, Room currentRoom,
-      Stack<Room> oldRooms, Integer locX, Integer locY,
-      Weapon weapon, Integer attack, Integer health) {
-    this.id = id;
-    this.name = name;
-    this.money = money;
-    this.weight = weight;
-    this.bag = bag;
-    this.currentRoom = currentRoom;
-    this.oldRooms = oldRooms;
-    this.locX = locX;
-    this.locY = locY;
-    this.weapon = weapon;
-    this.attack = attack;
-    this.health = health;
-  }
-  public Player(){}
 }
