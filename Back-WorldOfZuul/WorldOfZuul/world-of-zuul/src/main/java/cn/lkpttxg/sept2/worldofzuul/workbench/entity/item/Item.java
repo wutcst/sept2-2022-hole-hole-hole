@@ -2,6 +2,7 @@ package cn.lkpttxg.sept2.worldofzuul.workbench.entity.item;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 import lombok.Data;
 
 /**
@@ -68,4 +69,5 @@ public abstract class Item implements Serializable{
   public int hashCode() {
     return Objects.hash(weight, describe, name, id);
   }
+
 }
