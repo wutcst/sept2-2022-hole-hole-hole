@@ -11,9 +11,9 @@ spring:
     port: 6379
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://124.222.55.179:3306/worldofzuul
+    url: jdbc:mysql://localhost:3306/worldofzuul
     username: root
-    password: ll0304051X
+    password: root
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:

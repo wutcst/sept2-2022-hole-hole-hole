@@ -26,7 +26,8 @@ public interface UserService {
    * @param playerName 玩家名
    * @param email 邮箱
    * @param password 密码
+   * @return 如果存在用户返回false 否则返回true
    */
-  public void register(String username, String playerName, String email, String password);
+  public boolean register(String username, String playerName, String email, String password);
 
 }

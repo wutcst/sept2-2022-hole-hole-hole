@@ -43,10 +43,16 @@ public class UserServiceImpl implements UserService {
    * @param password 密码
    */
   @Override
-  public void register(String username, String playerName, String email, String password) {
+  public boolean register(String username, String playerName, String email, String password) {
+    User user = userDao.selectUserByUsername(username);
+    if(user != null){
+      return false;
+    }
     String playerId = UUIDUtil.getUUID();
-    User user = new User(null, playerId, password, username, email);
+    user = new User(null, playerId, password, username, email);
     Player player = new Player(playerId, playerName);
     playerDao.createPlayer(player);
+    userDao.insertUser(user);
+    return true;
   }
 }

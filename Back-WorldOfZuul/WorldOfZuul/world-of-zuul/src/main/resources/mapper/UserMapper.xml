@@ -12,4 +12,7 @@
   <update id="updatePasswordById">
     update USER set password = #{password} where userId = {id}
   </update>
+  <select id="selectUserByUsername" resultType="cn.lkpttxg.sept2.worldofzuul.settings.entity.user.User">
+    select * from USER where username = #{username}
+  </select>
 </mapper>

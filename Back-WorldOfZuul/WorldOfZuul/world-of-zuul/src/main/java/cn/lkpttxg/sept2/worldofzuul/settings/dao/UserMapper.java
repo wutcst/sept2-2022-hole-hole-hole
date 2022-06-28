@@ -37,4 +37,11 @@ public interface UserMapper {
    * @return 改动记录数
    */
   int updatePasswordById(@Param("id") String userId, @Param("password") String password);
+
+  /**
+   * 根据用户名查找用户
+   * @param username 用户名
+   * @return 用户
+   */
+  User selectUserByUsername(@Param("username") String username);
 }
