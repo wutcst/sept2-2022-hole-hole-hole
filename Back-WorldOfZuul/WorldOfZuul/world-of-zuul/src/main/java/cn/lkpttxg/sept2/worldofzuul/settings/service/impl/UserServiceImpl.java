@@ -4,6 +4,7 @@ import cn.lkpttxg.sept2.worldofzuul.common.util.UUIDUtil;
 import cn.lkpttxg.sept2.worldofzuul.settings.dao.UserMapper;
 import cn.lkpttxg.sept2.worldofzuul.settings.entity.user.User;
 import cn.lkpttxg.sept2.worldofzuul.settings.service.UserService;
+import cn.lkpttxg.sept2.worldofzuul.workbench.core.Game;
 import cn.lkpttxg.sept2.worldofzuul.workbench.dao.PlayerDao;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
 import javax.annotation.Resource;
@@ -20,6 +21,8 @@ public class UserServiceImpl implements UserService {
   private UserMapper userDao;
   @Resource
   private PlayerDao playerDao;
+  @Resource
+  private Game game;
 
   /**
    * 用户登录
@@ -30,7 +33,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public User login(String username, String password) {
     User user = userDao.selectUserByPasswordAndUsername(username, password);
-    // TODO:初始化人物放入Game类中
+    game.addPlayer(playerDao.getPlayerById(user.getPlayerId()));
     return user;
   }
 
