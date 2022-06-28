@@ -2,7 +2,9 @@ package cn.lkpttxg.sept2.worldofzuul.workbench.entity.item;
 
 import java.io.Serializable;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 物品父类
@@ -11,6 +13,8 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Item implements Serializable{
 
   private static final long serialVersionUID = -5474275722705402384L;
@@ -30,16 +34,6 @@ public abstract class Item implements Serializable{
    * 物品编号
    */
   private String id;
-
-  public Item(Integer weight, String describe, String name, String id) {
-    this.weight = weight;
-    this.describe = describe;
-    this.name = name;
-    this.id = id;
-  }
-
-  public Item() {
-  }
 
   /**
    * 基于物品编号比对物品是否相等

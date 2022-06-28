@@ -4,7 +4,9 @@ import java.util.HashMap;
 
 import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.WeaponTypes;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 武器实体类
@@ -13,6 +15,8 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Weapon extends Item {
 
   private static final long serialVersionUID = -8649276121917779517L;
@@ -24,13 +28,10 @@ public class Weapon extends Item {
    * 武器的耐久
    */
   private Integer durable;
-
-  public Weapon(String id, Integer weight, String describe, String name, Integer weaponAttack,
-      Integer durable) {
-    super(weight, describe, name, id);
-    this.weaponAttack = weaponAttack;
-    this.durable = durable;
-  }
+  /**
+   * 武器类型
+   */
+  private WeaponTypes type;
 
   /**
    * 根据武器种类构造对象

@@ -4,7 +4,9 @@ import java.util.HashMap;
 
 import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.TreasureTypes;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 财宝实体类
@@ -13,6 +15,8 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Treasure extends Item {
 
   private static final long serialVersionUID = -4981090747474372788L;
@@ -20,12 +24,10 @@ public class Treasure extends Item {
    * 物品价值
    */
   private Integer value;
-
-  public Treasure(String id, Integer weight, String describe, String name,
-      Integer value) {
-    super(weight, describe, name, id);
-    this.value = value;
-  }
+  /**
+   * 财宝种类
+   */
+  private TreasureTypes type;
 
   /**
    * 根据财宝种类构造对象

@@ -5,10 +5,12 @@ import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Weapon;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
+import javax.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.HashMap;
 import java.util.Stack;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -16,14 +18,13 @@ import java.util.Stack;
  *
  * @author PpxiA
  */
+@Component
 public class PlayerDao {
+  @Resource
   private RedisTemplate<String, byte[]> redisTemplate;
-  // TODO: 依赖注入
-  SerializeUtil sru = new SerializeUtil();
-  // TODO: redisTemplate无法注入
-  public PlayerDao(RedisTemplate redisTemplate){
-    this.redisTemplate = redisTemplate;
-  }
+  @Resource
+  SerializeUtil sru;
+
   /**
    * 创建玩家
    * @param player 玩家对象
@@ -58,9 +59,9 @@ public class PlayerDao {
    * @param id 玩家id
    * @return 玩家位置
    */
-  public int[] getLocationById(String id){
+  public int getLocationById(String id){
     Player player = getPlayerById(id);
-    return new int[]{player.getLocX(), player.getLocY()};
+    return player.getLoc();
   }
 
   /**
@@ -233,13 +234,13 @@ public class PlayerDao {
 
   /**
    * 更新玩家当前位置
+   *
    * @param id 玩家id
    * @param location 玩家坐标
    */
-  public void updateLocationById(String id, int[] location){
+  public void updateLocationById(String id, int location){
     Player player = getPlayerById(id);
-    player.setLocX(location[0]);
-    player.setLocY(location[1]);
+    player.setLoc(location);
     createPlayer(player);
   }
 }
