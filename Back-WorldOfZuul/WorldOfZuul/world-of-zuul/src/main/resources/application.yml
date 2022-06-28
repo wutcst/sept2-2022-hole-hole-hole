@@ -10,10 +10,10 @@ spring:
     host: localhost
     port: 6379
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/worldofzuul
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://124.222.55.179:3306/worldofzuul?useUnicode=true&useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useAffectedRows=true&allowMultiQueries=true
     username: root
-    password: root
+    password: "ll0304051X"
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:

@@ -16,7 +16,7 @@ public class User {
   /**
    * 用户id
    */
-  private int userId;
+  private Integer userId;
   /**
    * 用户绑定玩家id
    */
