@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 Vue.use(Router)
 
-import HelloWorld from '../components/HelloWorld.vue';
+import Home from '../components/HelloWorld.vue';
 import loginInterface from '../views/loginInterface.vue';
 
 export default new Router({
@@ -12,7 +12,7 @@ export default new Router({
       routes: [
         {
           path: '/hello',
-          component: HelloWorld 
+          component: Home
         },
         {
           path: '/home',
