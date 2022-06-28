@@ -5,6 +5,7 @@ Vue.use(Router)
 
 import HelloWorld from '../components/HelloWorld.vue';
 import loginInterface from '../views/loginInterface.vue';
+import Home from '../components/Home.vue'
 
 export default new Router({
 
@@ -15,8 +16,12 @@ export default new Router({
           component: HelloWorld 
         },
         {
-          path: '/home',
+          path: '/index',
           component: loginInterface
+        },
+        {
+          path: '/home',
+          component: Home
         }
       ]
     })
