@@ -13,18 +13,20 @@ new Vue({
     // store,
     // router,
     render: h => h(App),
-    // created(){
-    //     this.CheckLogin();
-    // },
-    // methods:{
-    //     CheckLogin(){
-    //         // if(!this.getCookie('session')){
-    //         //     this.$router.push('/hello');
-    //         // }else{
-    //         //     this.$router.push('/home');
-    //         // }
-    //         this.$router.push('/home');
-    //     }
-    // }
+
+    created(){
+        this.CheckLogin();
+    },
+    methods:{
+        CheckLogin(){
+            // if(!this.getCookie('session')){
+            //     this.$router.push('/hello');
+            // }else{
+            //     this.$router.push('/home');
+            // }
+            this.$router.push('/index');
+        }
+    }
+
 }).$mount('#app')
 
