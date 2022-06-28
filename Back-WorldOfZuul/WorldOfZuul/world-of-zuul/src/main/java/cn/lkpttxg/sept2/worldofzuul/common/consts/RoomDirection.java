@@ -1,9 +1,12 @@
 package cn.lkpttxg.sept2.worldofzuul.common.consts;
 
+import io.swagger.annotations.ApiModel;
+
 /**
  * @author TXG
  * @date 2022/6/27$
  */
+@ApiModel(description = "房间的出口方向")
 public interface RoomDirection {
     /**
      * 北方

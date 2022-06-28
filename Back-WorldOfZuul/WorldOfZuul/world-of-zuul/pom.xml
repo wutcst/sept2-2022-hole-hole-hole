@@ -118,6 +118,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>world-of-zuul</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

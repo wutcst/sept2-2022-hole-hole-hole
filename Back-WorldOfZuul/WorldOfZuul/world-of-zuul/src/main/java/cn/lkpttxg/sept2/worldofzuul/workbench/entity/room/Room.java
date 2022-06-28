@@ -13,6 +13,8 @@ import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Food;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Treasure;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Weapon;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.monster.Monster;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,6 +30,7 @@ import java.util.Set;
  * @author TXG
  * @version 1.0
  */
+@ApiModel(description = "房间信息")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,23 +42,28 @@ public class Room implements Serializable {
   /**
    * 房间id
    */
+  @ApiModelProperty(value = "房间唯一id",notes = "普通房间以 #3xxx 开头，传送房间以 #4xxx 开头",required = true,dataType = "String",example = "#3001")
   private String id;
   /**
    * 房间类型
    */
+  @ApiModelProperty(value = "房间的类型",notes = "普通房间类型为 1001，传送房间为 1002",required = true,dataType = "Integer",example = "1001")
   private Integer roomType;
   /**
    * 房间名
    */
+  @ApiModelProperty(value = "房间的名字",example = "例如：forest")
   private String name;
   /**
    * 房间描述
    */
+  @ApiModelProperty(value = "房间的简单描述")
   private String description;
 
   /**
    * 用 HashMap 存放了一个房间的各种出口与其对应房间的 key-value 值.
    */
+  @ApiModelProperty(value = "每个出口指向的方向",dataType = "HashMap")
   private HashMap<String, Room> exits;
   /**
    * 房间内的所有物品
@@ -64,6 +72,7 @@ public class Room implements Serializable {
   /**
    * 房间内除玩家的所有事物
    */
+  @ApiModelProperty(value = "当前房间的所有物品")
   private Object[] objects;
 
 
@@ -119,6 +128,7 @@ public class Room implements Serializable {
    *
    *@return 对房间进行一个简短的描述
    */
+  @ApiModelProperty(value = "房间的简单描述")
   public String getShortDescription() {
     return this.description;
   }
@@ -128,6 +138,7 @@ public class Room implements Serializable {
    *
    *@return 对房间进行一个细致描述
    */
+  @ApiModelProperty(value = "房间的长描述",example = "你发现自己在 XXX ")
   public String getLongDescription() {
     return "你发现自己在 " + this.description + ".\n" + getItemsDescription() + getExitString();
   }
@@ -137,6 +148,7 @@ public class Room implements Serializable {
    *
    *@return 物品们的描述信息
    */
+  @ApiModelProperty(value = "物品的描述信息",example = "这个地方啥都没有")
   public String getItemsDescription() {
     if (isEmpty()) {
       return "这个地方啥都没有" + '\n';
@@ -173,6 +185,7 @@ public class Room implements Serializable {
    *
    * @return 返回房间的所有出口信息
    */
+  @ApiModelProperty(value = "所有出口信息")
   private String getExitString() {
     String returnString = "Exits:";
     //获取map对应的set
@@ -233,9 +246,10 @@ public class Room implements Serializable {
   /**
    * 判断是否是传送房间
    */
+  @ApiModelProperty(value = "房间是否是传送房间")
   public boolean isTransferRoom()
   {
-    return RoomType.TRANSFER_ROOM == this.roomType;
+    return RoomType.TRANSFER_ROOM.equals(this.roomType);
   }
 
 }
