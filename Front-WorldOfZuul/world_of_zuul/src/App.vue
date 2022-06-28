@@ -3,44 +3,44 @@
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <div>
     <transition name="fade">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+<!--      <keep-alive>-->
+<!--        <router-view></router-view>-->
+<!--      </keep-alive>-->
+      <Home/>
     </transition>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import Home from './components/Home.vue'
 //import loginInterface from './views/loginInterface.vue'
 
 export default {
   name: 'App',
-  // components: {
-  //   loginInterface
-  //   // HelloWorld
+  components: {
+   Home
+  },
+  // data(){
+  //   return {
+  //     isLogin:false,
+  //     userInfo:{
+  //       level:null,
+  //     }
+  //   }
+  // },
+  //
+  // mounted(){
+  //   this.getUserInfo();
+  // },
+  //
+  // methods:{
+  //   getUserInfo(){
+  //     this.userInfo = {
+  //       level: 0,
+  //     }
+  //     this.$store.commit('updateUserInfo',this.userInfo);
+  //   }
   // }
-  data(){
-    return {
-      isLogin:false,
-      userInfo:{
-        level:null,
-      }
-    }
-  },
-
-  mounted(){
-    this.getUserInfo();
-  },
-
-  methods:{
-    getUserInfo(){
-      this.userInfo = {
-        level: 0,
-      }
-      this.$store.commit('updateUserInfo',this.userInfo);
-    }
-  }
 }
 </script>
 
