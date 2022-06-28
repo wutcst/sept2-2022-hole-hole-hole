@@ -2,7 +2,6 @@ package cn.lkpttxg.sept2.worldofzuul.workbench.core;
 
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.map.GameMap;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
-import lombok.Data;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +13,10 @@ import java.util.HashMap;
  * @date 2022/6/27$
  */
 @Component
-@Data
 public class Game {
+    @Resource
     private GameMap gameMap;
+
     private HashMap<String,Player> players;
     @Resource
     private RedisTemplate<String,byte[]> redisTemplate;
@@ -26,7 +26,6 @@ public class Game {
     }
 
     private void initialGame() {
-        gameMap = new GameMap();
         players = new HashMap<>();
     }
 
@@ -51,4 +50,23 @@ public class Game {
         return player;
     }
 
+    public GameMap getGameMap() {
+        return gameMap;
+    }
+
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
+
+    public HashMap<String, Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(HashMap<String, Player> players) {
+        this.players = players;
+    }
+
+    public Player getPlayer(String userId){
+        return players.get(userId);
+    }
 }

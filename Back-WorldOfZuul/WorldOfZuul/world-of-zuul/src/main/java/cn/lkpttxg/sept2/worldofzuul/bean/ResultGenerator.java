@@ -25,13 +25,13 @@ public class ResultGenerator {
 
     public static ResponseData genFailResult(String message){
         return new ResponseData().setVersion(Settings.VERSION)
-                .setCode(ResultCode.SUCCESS)
+                .setCode(ResultCode.NOT_FOUND)
                 .setMessage(message);
     }
 
     public static <T>ResponseData genFailResult(String message,T data){
         return new ResponseData<T>().setVersion(Settings.VERSION)
-                .setCode(ResultCode.SUCCESS)
+                .setCode(ResultCode.NOT_FOUND)
                 .setMessage(message)
                 .setData(data);
     }

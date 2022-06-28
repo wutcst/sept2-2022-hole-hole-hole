@@ -3,11 +3,6 @@ package cn.lkpttxg.sept2.worldofzuul.workbench.entity.monster;
 import cn.lkpttxg.sept2.worldofzuul.common.enums.monster.MonsterTypes;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -16,10 +11,6 @@ import java.util.HashMap;
  * @date 2022/6/27$
  */
 @ApiModel(description = "怪物信息")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
 public class Monster implements Serializable {
     private static final long serialVersionUID = -2313418473379522963L;
     /**
@@ -69,6 +60,54 @@ public class Monster implements Serializable {
         this.description = (String)attribute.get("description");
         this.health = (Integer) attribute.get("health");
         this.attack = (Integer) attribute.get("attack");
+        this.location = location;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getHealth() {
+        return health;
+    }
+
+    public void setHealth(Integer health) {
+        this.health = health;
+    }
+
+    public Integer getAttack() {
+        return attack;
+    }
+
+    public void setAttack(Integer attack) {
+        this.attack = attack;
+    }
+
+    public Integer getLocation() {
+        return location;
+    }
+
+    public void setLocation(Integer location) {
         this.location = location;
     }
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/test")
 @Api(tags = "测试模块")
 public class TestController {
     @ApiOperation(value = "测试接口1", notes = "用于测试的第一个例子")

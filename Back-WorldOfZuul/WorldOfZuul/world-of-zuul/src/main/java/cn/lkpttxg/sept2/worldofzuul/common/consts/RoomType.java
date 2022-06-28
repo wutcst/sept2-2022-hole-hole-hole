@@ -8,10 +8,10 @@ public interface RoomType {
     /**
      * 1.普通房间
      */
-    Integer GENERAL_ROOM = 1001;
+    Integer GENERAL_ROOM = 1;
     /**
      * 2.传送房间
      */
-    Integer TRANSFER_ROOM = 1002;
+    Integer TRANSFER_ROOM = 2;
 
 }

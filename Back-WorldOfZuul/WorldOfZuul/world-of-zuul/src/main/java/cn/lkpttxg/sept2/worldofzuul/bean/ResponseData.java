@@ -4,6 +4,8 @@ import cn.lkpttxg.sept2.worldofzuul.common.enums.resultCode.ResultCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -15,7 +17,7 @@ import lombok.experimental.Accessors;
  * 是该节点后台返回的数据类型。
  */
 @ApiModel(description = "标准的后台响应数据")
-@Data
+@Getter
 @Accessors(chain=true)
 public class ResponseData<T> {
 
@@ -29,9 +31,29 @@ public class ResponseData<T> {
     private T data;
 
     //set返回this可以连续赋值
-    public ResponseData setCode(ResultCode resultCode) {
+    public ResponseData<T> setCode(ResultCode resultCode) {
         //赋值状态码
         this.code = resultCode.code;
+        return this;
+    }
+
+    public ResponseData<T> setVersion(String version) {
+        this.version = version;
+        return this;
+    }
+
+    public ResponseData<T>setCode(int code) {
+        this.code = code;
+        return this;
+    }
+
+    public ResponseData<T> setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public ResponseData<T> setData(T data) {
+        this.data = data;
         return this;
     }
 }

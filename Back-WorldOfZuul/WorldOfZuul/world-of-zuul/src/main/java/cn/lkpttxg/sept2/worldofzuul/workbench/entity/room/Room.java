@@ -13,12 +13,9 @@ import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Food;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Treasure;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Weapon;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.monster.Monster;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -31,10 +28,6 @@ import java.util.Set;
  * @version 1.0
  */
 @ApiModel(description = "房间信息")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
 public class Room implements Serializable {
 
   private static final long serialVersionUID = 6861875739170631260L;
@@ -42,12 +35,12 @@ public class Room implements Serializable {
   /**
    * 房间id
    */
-  @ApiModelProperty(value = "房间唯一id",notes = "普通房间以 #3xxx 开头，传送房间以 #4xxx 开头",required = true,dataType = "String",example = "#3001")
+  @ApiModelProperty(value = "房间唯一id",notes = "普通房间以 3xxx 开头，传送房间以 4xxx 开头",required = true,dataType = "String",example = "3001")
   private String id;
   /**
    * 房间类型
    */
-  @ApiModelProperty(value = "房间的类型",notes = "普通房间类型为 1001，传送房间为 1002",required = true,dataType = "Integer",example = "1001")
+  @ApiModelProperty(value = "房间的类型",notes = "普通房间类型为 1，传送房间为 2",required = true,dataType = "Integer",example = "1")
   private Integer roomType;
   /**
    * 房间名
@@ -64,6 +57,7 @@ public class Room implements Serializable {
    * 用 HashMap 存放了一个房间的各种出口与其对应房间的 key-value 值.
    */
   @ApiModelProperty(value = "每个出口指向的方向",dataType = "HashMap")
+  @JsonBackReference
   private HashMap<String, Room> exits;
   /**
    * 房间内的所有物品
@@ -80,6 +74,7 @@ public class Room implements Serializable {
     System.out.println(new Room(RoomTypes.FOREST));
   }
 
+  public Room(){}
   public Room(RoomTypes roomTypes){
     HashMap map = roomTypes.getAttribute();
     this.id = (String)map.get("id");
@@ -203,7 +198,7 @@ public class Room implements Serializable {
    * @param direction 方向指令
    * @return 返回这个房间某个出口对应的<code>Room</code>对象
    */
-  public Room getExit(RoomDirection direction) {
+  public Room getExit(String direction) {
     return exits.get(direction);
   }
 
@@ -252,4 +247,51 @@ public class Room implements Serializable {
     return RoomType.TRANSFER_ROOM.equals(this.roomType);
   }
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getRoomType() {
+    return roomType;
+  }
+
+  public void setRoomType(Integer roomType) {
+    this.roomType = roomType;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public HashMap<String, Room> getExits() {
+    return exits;
+  }
+
+  public void setExits(HashMap<String, Room> exits) {
+    this.exits = exits;
+  }
+
+  public Object[] getObjects() {
+    return objects;
+  }
+
+  public void setObjects(Object[] objects) {
+    this.objects = objects;
+  }
 }
