@@ -15,11 +15,22 @@ public class ResultGenerator {
                 .setCode(ResultCode.SUCCESS)
                 .setMessage(DEFAULT_SUCCESS_MESSAGE);
     }
+    public static ResponseData genSuccessResult(String message){
+        return new ResponseData().setVersion(Settings.VERSION)
+                .setCode(ResultCode.SUCCESS)
+                .setMessage(message);
+    }
 
     public static <T>ResponseData genSuccessResult(T data){
         return new ResponseData<T>().setVersion(Settings.VERSION)
                 .setCode(ResultCode.SUCCESS)
                 .setMessage(DEFAULT_SUCCESS_MESSAGE)
+                .setData(data);
+    }
+    public static <T>ResponseData genSuccessResult(String message,T data){
+        return new ResponseData<T>().setVersion(Settings.VERSION)
+                .setCode(ResultCode.SUCCESS)
+                .setMessage(message)
                 .setData(data);
     }
 

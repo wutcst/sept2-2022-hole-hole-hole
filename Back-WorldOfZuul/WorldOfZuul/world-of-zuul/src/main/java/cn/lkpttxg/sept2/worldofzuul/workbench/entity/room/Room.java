@@ -1,5 +1,6 @@
 package cn.lkpttxg.sept2.worldofzuul.workbench.entity.room;
 
+import cn.lkpttxg.sept2.worldofzuul.bean.NullObject;
 import cn.lkpttxg.sept2.worldofzuul.common.consts.RoomDirection;
 import cn.lkpttxg.sept2.worldofzuul.common.consts.RoomType;
 import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.FoodTypes;
@@ -93,6 +94,9 @@ public class Room implements Serializable {
    * 初始化房间内的物品位置
    */
   private void initialRoom() {
+    for(int i = 0;i<25;i++){
+      this.objects[i] = new NullObject();
+    }
       //初始化物品
       //1.初始化食物
       int randomLocation1 =  CommonUtil.getRandomLocation();
