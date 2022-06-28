@@ -6,6 +6,8 @@ import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.WeaponTypes;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
 import lombok.Data;
 import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * 武器实体类
@@ -14,6 +16,8 @@ import lombok.ToString;
  * @version 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString(callSuper = true)
 public class Weapon extends Item {
 

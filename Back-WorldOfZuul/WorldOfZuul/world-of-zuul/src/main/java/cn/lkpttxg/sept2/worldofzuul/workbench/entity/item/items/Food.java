@@ -6,6 +6,8 @@ import java.util.HashMap;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
 import lombok.Data;
 import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * 食物实体类
@@ -15,6 +17,8 @@ import lombok.ToString;
  */
 @Data
 @ToString(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Food extends Item {
 
   private static final long serialVersionUID = 8565511453210334744L;

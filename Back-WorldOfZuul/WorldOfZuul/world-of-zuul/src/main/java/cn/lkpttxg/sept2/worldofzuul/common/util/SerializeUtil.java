@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import org.springframework.stereotype.Component;
 
 /**
  * 对象序列化以及反序列化工具类，用于将对象进行序列化转为字节数组以及将字节数组还原为对象
@@ -13,6 +14,7 @@ import java.io.ObjectOutputStream;
  * @author PpxiA
  * @version 1.0
  */
+@Component
 public class SerializeUtil {
 
   /**
