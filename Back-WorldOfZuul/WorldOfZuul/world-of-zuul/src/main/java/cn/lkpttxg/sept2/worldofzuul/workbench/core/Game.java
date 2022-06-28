@@ -66,7 +66,7 @@ public class Game {
         this.players = players;
     }
 
-    public Player getPlayer(String userId){
-        return players.get(userId);
+    public Player getPlayer(String playerId){
+        return players.get(playerId);
     }
 }

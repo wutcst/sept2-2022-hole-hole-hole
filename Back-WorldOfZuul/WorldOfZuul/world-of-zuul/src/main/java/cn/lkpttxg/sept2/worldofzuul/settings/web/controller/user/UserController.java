@@ -1,9 +1,9 @@
-package cn.lkpttxg.sept2.worldofzuul.settings.web.controller;
+package cn.lkpttxg.sept2.worldofzuul.settings.web.controller.user;
 
 import cn.lkpttxg.sept2.worldofzuul.bean.ResponseData;
 import cn.lkpttxg.sept2.worldofzuul.bean.ResultGenerator;
 import cn.lkpttxg.sept2.worldofzuul.settings.entity.user.User;
-import cn.lkpttxg.sept2.worldofzuul.settings.service.UserService;
+import cn.lkpttxg.sept2.worldofzuul.settings.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -11,12 +11,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/users")
-@Api("用户模块")
+@Api(tags = "用户模块")
 public class UserController{
     @Resource
     private UserService userService;
@@ -44,7 +41,8 @@ public class UserController{
     })
     @PostMapping("/login")
     public ResponseData login(String username, String password){
-        User user = userService.login(username, password);
+        String passwordMd5 = DigestUtils.md5DigestAsHex((password).getBytes());
+        User user = userService.login(username, passwordMd5);
         if(user == null){
             return ResultGenerator.genFailResult("用户名或密码错误！");
         }else{
@@ -69,7 +67,8 @@ public class UserController{
     })
     @PostMapping("/register")
     public ResponseData register(String username, String playerName, String email, String password){
-        if(userService.register(username, playerName, email, password)){
+        String passwordMd5 = DigestUtils.md5DigestAsHex((password).getBytes());
+        if(userService.register(username, playerName, email, passwordMd5)){
             return ResultGenerator.genSuccessResult();
         }else{
             return ResultGenerator.genFailResult("存在同名用户！");
