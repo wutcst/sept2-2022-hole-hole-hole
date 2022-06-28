@@ -26,6 +26,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
     public Docket createRestApi(){
         return  new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .groupName("WorldOfZuul")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.lkpttxg.sept2.worldofzuul"))
                 .apis(RequestHandlerSelectors.any())
@@ -38,7 +39,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
         return new ApiInfoBuilder()
                 .title("World Of Zuul APIs")
                 .description("软工实践2项目Api文档")
-                .termsOfServiceUrl("http://localhost:8081/worldOfZuul")
+                .termsOfServiceUrl("http://localhost:80/worldOfZuul")
                 .contact("刘磊 1301287726@qq.com|林冠成|马必争|杨灿")
                 .version("1.0")
                 .build();

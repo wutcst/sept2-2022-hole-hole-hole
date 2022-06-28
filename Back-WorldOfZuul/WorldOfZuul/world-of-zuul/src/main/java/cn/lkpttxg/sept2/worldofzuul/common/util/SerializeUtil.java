@@ -1,5 +1,7 @@
 package cn.lkpttxg.sept2.worldofzuul.common.util;
 
+import cn.lkpttxg.sept2.worldofzuul.common.consts.RoomDirection;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -70,5 +72,9 @@ public class SerializeUtil {
       }
     }
     return null;
+  }
+
+  public static void main(String[] args) {
+
   }
 }

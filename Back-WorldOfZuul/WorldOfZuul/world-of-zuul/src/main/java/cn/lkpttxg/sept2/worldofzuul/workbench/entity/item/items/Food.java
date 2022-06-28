@@ -4,8 +4,9 @@ import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.FoodTypes;
 import java.util.HashMap;
 
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 /**
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 @Data
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Food extends Item {
@@ -32,10 +34,15 @@ public class Food extends Item {
    * 对生命值的恢复
    */
   private Integer addHealth;
-  /**
-   * 食物类型
-   */
-  private FoodTypes type;
+
+
+  public Food(String id, Integer weight, String describe, String name, Integer addWeight,
+      Integer addAttack, Integer addHealth) {
+    super(weight, describe, name, id);
+    this.addWeight = addWeight;
+    this.addAttack = addAttack;
+    this.addHealth = addHealth;
+  }
 
   /**
    * 根据食物种类构造对象

@@ -7,6 +7,7 @@ import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * 财宝实体类
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 @Data
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Treasure extends Item {
@@ -24,10 +26,12 @@ public class Treasure extends Item {
    * 物品价值
    */
   private Integer value;
-  /**
-   * 财宝种类
-   */
-  private TreasureTypes type;
+
+  public Treasure(String id, Integer weight, String describe, String name,
+      Integer value) {
+    super(weight, describe, name, id);
+    this.value = value;
+  }
 
   /**
    * 根据财宝种类构造对象

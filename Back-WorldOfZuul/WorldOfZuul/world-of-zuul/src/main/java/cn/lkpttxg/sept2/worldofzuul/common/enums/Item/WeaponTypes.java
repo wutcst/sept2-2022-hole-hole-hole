@@ -14,17 +14,17 @@ public enum WeaponTypes {
    * 小刀
    * 攻击力 5 耐久 5
    */
-  KNIFE(new Object[]{"#0007", "匕首", "短小精悍", 5, 5, 5}),
+  KNIFE(new Object[]{"0007", "匕首", "短小精悍", 5, 5, 5}),
   /**
    * 铁剑
    * 攻击力 10, 耐久 10
    */
-  SWORD(new Object[]{"#0008", "铁剑", "精准而优雅", 15, 10, 10}),
+  SWORD(new Object[]{"0008", "铁剑", "精准而优雅", 15, 10, 10}),
   /**
    * 誓约胜利之剑
    * 攻击力 50, 耐久100
    */
-  EXCALIBUR(new Object[]{"#0009", "誓约胜利之剑", "Excalibur!!", 25, 50, 100});
+  EXCALIBUR(new Object[]{"0009", "誓约胜利之剑", "Excalibur!!", 25, 50, 100});
 
   /**
    * 属性Map
