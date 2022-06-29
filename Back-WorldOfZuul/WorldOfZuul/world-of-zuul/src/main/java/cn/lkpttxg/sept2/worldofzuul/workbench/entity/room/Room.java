@@ -222,7 +222,7 @@ public class Room implements Serializable {
   }
 
   /**
-   * TODO 拿房间指定位置的物品
+   * 拿房间指定位置的物品
    *
    * @param location 物品坐标
    * @return 获取的物品
@@ -233,6 +233,20 @@ public class Room implements Serializable {
       item = (Item) objects[location];
     }
     objects[location] = new NullObject();
+    return item;
+  }
+
+  /**
+   * 查看指定位置的物品
+   *
+   * @param location 位置
+   * @return 指定位置的物品
+   */
+  public Item showItem(Integer location){
+    Item item = null;
+    if(objects[location] instanceof Item) {
+      item = (Item) objects[location];
+    }
     return item;
   }
 
