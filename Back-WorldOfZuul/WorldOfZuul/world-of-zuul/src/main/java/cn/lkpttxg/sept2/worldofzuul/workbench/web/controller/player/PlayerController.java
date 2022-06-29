@@ -6,7 +6,6 @@ import cn.lkpttxg.sept2.worldofzuul.common.consts.ActionResult;
 import cn.lkpttxg.sept2.worldofzuul.common.enums.resultCode.ResultCode;
 import cn.lkpttxg.sept2.worldofzuul.workbench.core.Game;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
-import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Food;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
 import cn.lkpttxg.sept2.worldofzuul.workbench.service.player.PlayerService;
 import io.swagger.annotations.Api;
@@ -330,6 +329,25 @@ public class PlayerController {
             }else {
                 return ResultGenerator.genSuccessResult(message,player);
             }
+        }
+    }
+
+
+    @ApiOperation(value = "玩家退出游戏")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "玩家Id",required = true,paramType = "path",dataType = "String")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "成功信息，保存成功"),
+            @ApiResponse(code = 404,message = "玩家id错误，无该退出")
+    })
+    @GetMapping("/quit/{id}")
+    public ResponseData quitGame(@PathVariable(value = "id") String id) {
+        Player player = game.removePlayer(game.getPlayer(id));
+        if(player!=null){
+            return ResultGenerator.genSuccessResult("成功退出！！！");
+        }else {
+            return ResultGenerator.genFailResult("退出失败");
         }
     }
 }

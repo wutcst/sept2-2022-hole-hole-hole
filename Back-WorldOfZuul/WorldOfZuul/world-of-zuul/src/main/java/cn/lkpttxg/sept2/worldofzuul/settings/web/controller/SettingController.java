@@ -56,5 +56,16 @@ public class SettingController {
         return ResultGenerator.genSuccessResult("刷新成功！！！");
     }
 
+    @ApiOperation(value = "踢掉所有玩家",notes = "踢掉所有玩家")
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "踢掉成功"),
+            @ApiResponse(code = 404,message = "踢掉失败")
+    })
+    @GetMapping("/all/quit")
+    public ResponseData allQuit(){
+        game.removeAllPlayer();
+        return ResultGenerator.genSuccessResult("成功");
+    }
+
 
 }

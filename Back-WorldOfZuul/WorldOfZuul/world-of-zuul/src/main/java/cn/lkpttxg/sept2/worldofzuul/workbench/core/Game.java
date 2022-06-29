@@ -45,8 +45,7 @@ public class Game {
      * @return
      */
     public Player removePlayer(Player player){
-        players.remove(player.getId());
-        return player;
+        return players.remove(player.getId());
     }
 
     public GameMap getGameMap() {
@@ -68,6 +67,10 @@ public class Game {
 
     public Player getPlayer(String playerId){
         return players.get(playerId);
+    }
+
+    public void removeAllPlayer() {
+        players.clear();
     }
 
     //TODO:Save
