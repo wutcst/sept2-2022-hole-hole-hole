@@ -69,17 +69,20 @@
     </el-dialog>
 
     <el-aside width="400px">
-      <div class = "name">name:{{player_name}}</div>
+      <div style="font-family: ziti;font-size: 20px"class = "name">name:{{player_name}}</div>
       <div style="display: flex">
-        <div class="health" style="margin-right: 150px; margin-left: 10px">血量:{{health}}</div>
-        <div class="weight">剩余负重:{{weight}}KG</div>
+        <div class="health" style="margin-right: 150px; margin-left: 10px;font-family: ziti;font-size: 20px">血量:{{health}}</div>
+        <div style="font-family: ziti;font-size: 20px" class="weight">剩余负重:{{weight}}KG</div>
       </div>
       <div style="display: flex">
-        <div class="money" style="margin-right: 80px; margin-left: 10px">金钱:{{money}}</div>
-        <div class="weapon" style="margin-right: 80px">装备:{{weapon}}</div>
-        <div class="weapon">攻击:{{attack}}</div>
+        <div class="money" style="margin-right: 20px; margin-left: 10px;font-family: ziti;font-size: 20px">金钱:{{money}}</div>
+        <div v-if="weapon !== null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">装备:{{weapon.name}}</div>
+        <div v-if="weapon == null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">装备:{{weapon}}</div>
+        <div v-if="weapon !== null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">耐久:{{weapon.durable}}</div>
+        <div v-if="weapon == null"class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">耐久:{{weapon}}</div>
+        <div style="font-family: ziti;font-size: 20px" class="weapon">攻击:{{attack}}</div>
       </div>
-      <div class="bag">我的背包</div>
+      <div style="font-family: ziti;font-size: 20px" class="bag">我的背包</div>
       <div class="table_container">
         <el-table  border height="500"  :data="bag_data" >
           <el-table-column prop="item.name" label="物品" align="center" width = "79"></el-table-column>
@@ -103,8 +106,8 @@
     </el-aside>
     <el-container direction="vertical">
       <el-header>
-        <span style="margin: auto">当前房间:{{room_name}}</span>
-        <el-button type="primary" style="margin: auto 10px" @click = "handleReturn">返回上一间房间</el-button>
+        <span style="margin: auto;font-family: ziti ;font-size: 50px">当前房间:{{room_name}}</span>
+        <el-button type="primary" style="margin: auto 10px " @click = "handleReturn">返回上一间房间</el-button>
         <el-button type="primary" style="margin: auto 10px" @click = "flush">刷新</el-button>
         <el-button type="primary" style="margin: auto 10px" @click = "save">保存信息</el-button>
         <el-button type="primary" style="margin: auto 10px" @click = "quit">退出</el-button>
@@ -118,11 +121,11 @@
         </div >
         <div class="right">
           <div class="right_up">
-            <div v-html="longDescription"></div>
+            <div style="font-family: ziti;font-size: 20px" v-html="longDescription"></div>
           </div>
           <div class="right_down">
-            <div>提示</div>
-            <div v-html="message"></div>
+            <div style="font-family: ziti;font-size: 20px">提示</div>
+            <div style="font-family: ziti;font-size: 20px" v-html="message"></div>
           </div>
         </div>
 
@@ -156,7 +159,7 @@ export default {
       attack:'',
       health:'',
       money:'',
-      weapon:'',
+      weapon:{},
       weight:'',
       direction:'',
       message:'',
@@ -432,6 +435,7 @@ export default {
           that.weight = res.data.data.weight
           that.bag_data = res.data.data.arrBag
           that.datalist[that.currentPlayer].id = 3
+          console.log("武器",res.data.data.weapon)
         }
         else {
           that.$message.error(res.data.message)
@@ -567,6 +571,10 @@ export default {
 
 <style scoped>
 
+@font-face {
+  font-family: ziti;
+  src: url(../assets/FZFWHuanLTJW.TTF);
+}
 #app {
   position: absolute;
   top: 0;
