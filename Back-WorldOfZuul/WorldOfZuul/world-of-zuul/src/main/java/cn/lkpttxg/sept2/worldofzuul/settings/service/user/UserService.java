@@ -1,4 +1,4 @@
-package cn.lkpttxg.sept2.worldofzuul.settings.service;
+package cn.lkpttxg.sept2.worldofzuul.settings.service.user;
 
 import cn.lkpttxg.sept2.worldofzuul.settings.entity.user.User;
 import org.springframework.stereotype.Service;

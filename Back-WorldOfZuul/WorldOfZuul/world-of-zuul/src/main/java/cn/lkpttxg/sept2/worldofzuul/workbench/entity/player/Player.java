@@ -6,6 +6,9 @@ import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Weapon;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Stack;
 
@@ -86,6 +89,50 @@ public class Player implements Serializable{
     this.name = name;
   }
 
+  /**
+   * 往背包中加一个物品
+   *
+   * @param item 加入的物品
+   */
+  public void addItem(Item item){
+    bag.put(item, bag.getOrDefault(item, 0) + 1);
+  }
+
+  /**
+   * 删除背包中的一项物品 TODO 测试能否正确丢弃物品
+   *
+   * @param id 要丢弃的物品的id
+   */
+  public void deleteItem(String id){
+    Iterator<Entry<Item, Integer>> it = bag.entrySet().iterator();
+    while (it.hasNext()){
+      Entry<Item, Integer> itEntry = it.next();
+      if(itEntry.getKey().getId().equals(id)){
+        int num = itEntry.getValue() - 1;
+        if(num == 0){
+          it.remove();
+          return;
+        }
+        itEntry.setValue(num);
+        return;
+      }
+    }
+  }
+
+  /**
+   * 根据物品id获取背包中的物品
+   *
+   * @param id 物品id
+   * @return 有物品返回物品 无物品返回null
+   */
+  public Item getItem(String id){
+    for(Map.Entry<Item, Integer> entry : bag.entrySet()){
+      if(entry.getKey().getId().equals(id)){
+        return entry.getKey();
+      }
+    }
+    return null;
+  }
   public Player(){
       this.bag = new HashMap<>();
       this.arrBag = new ArrayList<>();

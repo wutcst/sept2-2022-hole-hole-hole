@@ -66,8 +66,9 @@ public class Game {
         this.players = players;
     }
 
-    public Player getPlayer(String playId){
-        return players.get(playId);
+
+    public Player getPlayer(String playerId){
+        return players.get(playerId);
     }
 
     //TODO:Save
