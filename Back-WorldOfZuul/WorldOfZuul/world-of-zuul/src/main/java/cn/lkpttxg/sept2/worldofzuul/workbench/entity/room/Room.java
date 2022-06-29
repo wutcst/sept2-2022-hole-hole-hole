@@ -250,7 +250,6 @@ public class Room implements Serializable {
     return item;
   }
 
-
   /**
    * 向房间中增加一个物品。
    *

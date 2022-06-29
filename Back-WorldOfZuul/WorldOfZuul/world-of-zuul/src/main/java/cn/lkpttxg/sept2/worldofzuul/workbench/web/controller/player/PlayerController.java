@@ -64,8 +64,8 @@ public class PlayerController {
   public ResponseData<Player> pick(@PathVariable(value = "playerId") String playerId,
       Integer location) {
     Player player = game.getPlayer(playerId);
-      Item item = player.getCurrentRoom().showItem(location);
-      Integer result = playerService.pick(player, location);
+    Item item = player.getCurrentRoom().showItem(location);
+    Integer result = playerService.pick(player, location);
     if (result.equals(ActionResult.MISS)) {
       return ResultGenerator.genOtherResult(ResultCode.FAIL, "此位置没有物品！");
     } else if (result.equals(ActionResult.OVERWEIGHT)) {
