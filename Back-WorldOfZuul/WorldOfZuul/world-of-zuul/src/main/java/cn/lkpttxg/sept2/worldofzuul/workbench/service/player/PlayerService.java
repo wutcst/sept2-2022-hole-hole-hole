@@ -1,5 +1,4 @@
 package cn.lkpttxg.sept2.worldofzuul.workbench.service.player;
-
 import cn.lkpttxg.sept2.worldofzuul.common.consts.ActionResult;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
 
@@ -44,4 +43,3 @@ public interface PlayerService {
    * @return 可以装备返回 SUCCESS 不能装备返回 UNMATCH
    */
   public Integer equipWeapon(Player player, String id);
-}

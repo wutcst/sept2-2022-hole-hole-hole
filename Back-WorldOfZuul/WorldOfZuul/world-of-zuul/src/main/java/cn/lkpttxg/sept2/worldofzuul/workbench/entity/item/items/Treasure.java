@@ -4,10 +4,7 @@ import java.util.HashMap;
 
 import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.TreasureTypes;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * 财宝实体类
@@ -15,10 +12,11 @@ import lombok.ToString;
  * @author PpxiA
  * @version 1.0
  */
-@Data
-@ToString(callSuper = true)
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Treasure extends Item {
 
   private static final long serialVersionUID = -4981090747474372788L;
