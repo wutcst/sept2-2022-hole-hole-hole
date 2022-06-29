@@ -18,9 +18,9 @@ public enum RoomTypes {
     LAB(new Object[]{RoomID.LAB, RoomType.GENERAL_ROOM,"lab","in a computing lab"}),
     OFFICE(new Object[]{RoomID.OFFICE, RoomType.GENERAL_ROOM,"office","in the computing admin office"}),
     FOREST(new Object[]{RoomID.FOREST, RoomType.GENERAL_ROOM,"forest","一个神秘的森林"}),
-    CAVE(new Object[]{RoomID.CAVE, RoomType.TRANSFER_ROOM,"cave","一个神秘的洞穴。你觉得很诡异，这时一股强光突然出现，\"\n" +
-            "                + \"你看不到任何东西，只知道自己好像身体不受支配，随意飘动...\\n过来好一会，你才突然发现，\"\n" +
-            "                + \"你所处的早已不是洞穴，而是另一个地方"});
+    CAVE(new Object[]{RoomID.CAVE, RoomType.TRANSFER_ROOM,"cave","一个神秘的洞穴。你觉得很诡异，这时一股强光突然出现，<br/>"
+           + "你看不到任何东西，只知道自己好像身体不受支配，随意飘动...<br/>过来好一会，你才突然发现，<br/>"
+           + "你所处的早已不是洞穴，而是另一个地方"});
 
 
     private final HashMap<String,Object> attribute;
