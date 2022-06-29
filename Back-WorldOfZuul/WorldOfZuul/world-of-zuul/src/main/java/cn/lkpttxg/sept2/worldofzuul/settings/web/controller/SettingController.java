@@ -44,4 +44,17 @@ public class SettingController {
             return ResultGenerator.genSuccessResult("保存成功！！！");
         }
     }
+
+    @ApiOperation(value = "刷新所有房间",notes = "该接口会刷新所有非玩家所在的房间")
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "刷新成功"),
+            @ApiResponse(code = 404,message = "刷新失败")
+    })
+    @GetMapping("/flush")
+    public ResponseData flushMap(){
+        game.getGameMap().flush(game.getPlayers());
+        return ResultGenerator.genSuccessResult("刷新成功！！！");
+    }
+
+
 }

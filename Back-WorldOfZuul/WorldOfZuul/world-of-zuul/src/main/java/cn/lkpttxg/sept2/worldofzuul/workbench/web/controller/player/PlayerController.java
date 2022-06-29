@@ -64,8 +64,8 @@ public class PlayerController {
   public ResponseData<Player> pick(@PathVariable(value = "playerId") String playerId,
       Integer location) {
     Player player = game.getPlayer(playerId);
-    Integer result = playerService.pick(player, location);
-    Item item = player.getCurrentRoom().getItem(location);
+      Item item = player.getCurrentRoom().showItem(location);
+      Integer result = playerService.pick(player, location);
     if (result.equals(ActionResult.MISS)) {
       return ResultGenerator.genOtherResult(ResultCode.FAIL, "此位置没有物品！");
     } else if (result.equals(ActionResult.OVERWEIGHT)) {
@@ -263,7 +263,8 @@ public class PlayerController {
 
     })
     @ApiResponses({
-            @ApiResponse(code = 200,message = "攻击成功,data返回玩家的信息"),
+            @ApiResponse(code = 200,message = "攻击成功且怪物死亡,data返回玩家的信息"),
+            @ApiResponse(code = 201,message = "攻击成功但怪物没死亡,data返回玩家的信息"),
             @ApiResponse(code = 400,message = "攻击失败，怪物不存在"),
             @ApiResponse(code = 404,message = "玩家id错误，无该玩家"),
             @ApiResponse(code = 500,message = "玩家死亡，游戏结束"),
@@ -280,7 +281,7 @@ public class PlayerController {
         if(!(items[location] instanceof Monster)){
             return ResultGenerator.genOtherResult(ResultCode.FAIL,"攻击失败，怪物不存在");
         }
-        message +="玩家攻击成功\n";
+        message +="玩家攻击成功<br/>";
         //获取怪物
         Monster monster = (Monster) items[location];
         //人物血量
@@ -293,26 +294,26 @@ public class PlayerController {
         int monsterHealth = monster.getHealth();
         //攻击后人物血量
         playerHealth = Math.max(0,playerHealth-monsterAttack);
-        message +="玩家还有"+playerHealth+"滴血\n";
+        message +="玩家还有"+playerHealth+"滴血<br/>";
         //攻击后怪物血量
         monsterHealth =  Math.max(0,monsterHealth-playerAttack);
-        message +="怪物还有"+monsterHealth+"滴血\n";
+        message +="怪物还有"+monsterHealth+"滴血<br/>";
         //如果有武器，则还掉耐久
         if(player.getWeapon()!=null){
             Weapon weapon = player.getWeapon();
             player.getWeapon().setDurable(player.getWeapon().getDurable()-1);
-            message +="武器耐久还有"+weapon.getDurable()+"\n";
+            message +="武器耐久还有"+weapon.getDurable()+"<br/>";
             if(player.getWeapon().getDurable()==0){
                 player.setWeapon(null);
                 player.setWeight(player.getWeight()+weapon.getWeight());
-                message +="武器损坏！！！"+"\n";
+                message +="武器损坏！！！"+"<br/>";
             }
         }
         monster.setHealth(monsterHealth);
         if(monsterHealth==0){
-            message +="怪物死亡！！！\n";
+            message +="怪物死亡！！！<br/>";
             int mon  =(int)(5*Math.random()+1);
-            message +="怪物掉落了"+mon+"个金币\n";
+            message +="怪物掉落了"+mon+"个金币<br/>";
             if(playerHealth!=0){
                 player.setMoney(player.getMoney()+mon);
             }
@@ -320,11 +321,15 @@ public class PlayerController {
         }
         player.setHealth(playerHealth);
         if(playerHealth == 0){
-            message +="玩家死亡！！！\n";
+            message +="玩家死亡！！！<br/>";
             return ResultGenerator.genOtherResult(ResultCode.PLAYER_DIED,message);
         }else {
             player.convertJson();
-            return ResultGenerator.genSuccessResult(message,player);
+            if(monsterHealth!=0){
+                return ResultGenerator.genOtherResult(ResultCode.CONTINUE,message,player);
+            }else {
+                return ResultGenerator.genSuccessResult(message,player);
+            }
         }
     }
 }
