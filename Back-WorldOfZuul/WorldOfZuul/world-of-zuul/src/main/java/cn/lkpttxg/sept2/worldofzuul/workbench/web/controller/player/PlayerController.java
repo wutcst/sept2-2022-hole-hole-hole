@@ -44,6 +44,7 @@ public class PlayerController {
         if(player == null){
             return ResultGenerator.genFailResult("无该玩家");
         }else {
+            player.convertJson();
             return ResultGenerator.genSuccessResult(player);
         }
     }
@@ -79,7 +80,7 @@ public class PlayerController {
             }
             player.getOldRooms().push(currentRoom);
             player.setCurrentRoom(nextRoom);
-            return ResultGenerator.genSuccessResult(nextRoom);
+            return ResultGenerator.genSuccessResult("你来到了一个新的房间！",nextRoom);
         }
     }
 
@@ -104,12 +105,12 @@ public class PlayerController {
             } else {
                 Room backRoom = player.getOldRooms().pop();
                 player.setCurrentRoom(backRoom);
-                return ResultGenerator.genSuccessResult(backRoom);
+                return ResultGenerator.genSuccessResult("你回到了上一个房间",backRoom);
             }
         }
     }
 
-    @ApiOperation(value = "玩家攻击怪物")
+    @ApiOperation(value = "玩家攻击怪物",notes = "message均返回的是输出到控制台的信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id",value = "玩家Id",required = true,paramType = "path",dataType = "String"),
             @ApiImplicitParam(name = "location",value = "怪物位置",required = true,paramType = "query",dataType = "Integer")
@@ -164,8 +165,10 @@ public class PlayerController {
         monster.setHealth(monsterHealth);
         if(monsterHealth==0){
             message +="怪物死亡！！！\n";
+            int mon  =(int)(5*Math.random()+1);
+            message +="怪物掉落了"+mon+"个金币\n";
             if(playerHealth!=0){
-                player.setMoney(player.getMoney()+(int)(5*Math.random()+1));
+                player.setMoney(player.getMoney()+mon);
             }
             items[location] = new NullObject();
         }
@@ -174,6 +177,7 @@ public class PlayerController {
             message +="玩家死亡！！！\n";
             return ResultGenerator.genOtherResult(ResultCode.PLAYER_DIED,message);
         }else {
+            player.convertJson();
             return ResultGenerator.genSuccessResult(message,player);
         }
     }

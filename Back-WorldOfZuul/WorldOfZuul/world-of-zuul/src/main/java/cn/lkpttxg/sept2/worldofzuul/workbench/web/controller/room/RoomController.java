@@ -56,7 +56,6 @@ public class RoomController {
             @ApiResponse(code = 300,message = "前往的是传送房间,message中包含的是该传送房间的描述,data中存储玩家被传送到的随机房间信息"),
             @ApiResponse(code = 400,message = "对应的方向没有房间了"),
             @ApiResponse(code = 404,message = "id错误，游戏中无该id的房间")
-
     })
     @GetMapping("/{id}/{direction}")
     public ResponseData<Room> getNewRoom(@PathVariable(value = "id") String id,@PathVariable(value = "direction")String direction){
@@ -162,6 +161,7 @@ public class RoomController {
             return ResultGenerator.genSuccessResult(room);
         }else {
             return ResultGenerator.genFailResult("该玩家不存在");
+
             //return ResultGenerator.genSuccessResult(game.getGameMap().getInitRoom());
         }
     }

@@ -2,9 +2,8 @@ package cn.lkpttxg.sept2.worldofzuul.workbench.entity.item;
 
 import java.io.Serializable;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * 物品父类
@@ -12,7 +11,8 @@ import lombok.NoArgsConstructor;
  * @author PpxiA
  * @version 1.0
  */
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Item implements Serializable{

@@ -4,10 +4,7 @@ import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.FoodTypes;
 import java.util.HashMap;
 
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
-import lombok.Data;
-import lombok.ToString;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * 食物实体类
@@ -15,8 +12,8 @@ import lombok.NoArgsConstructor;
  * @author PpxiA
  * @version 1.0
  */
-@Data
-@ToString(callSuper = true)
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Food extends Item {
