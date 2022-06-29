@@ -41,8 +41,8 @@
             <el-button type="primary" @click="register">确 定</el-button>
         </span>
     </el-dialog>
-    <Loading v-if="isLoging" marginTop="-10%" style="margin-left: 750px;"></Loading>
-    <audio autoplay="autoplay" controls="controls" loop="loop" preload="auto" src="../assets/back.mp3"></audio>
+    <Loading v-if="isLoging" marginTop="-10%" style="margin-left: 47%;"></Loading>
+    <audio autoplay="autoplay" controls="controls" loop="loop" preload="auto" src="../assets/index.mp3"></audio>
 </div>
 </template>
 
@@ -121,7 +121,8 @@ export default {
                     },1*1000)
                 }
                 if(res.data.code == 404){
-                    this.$alert('登陆失败，请检查用户名密码是否正确','',{
+                    that.isLoging = false;
+                    that.$alert('登陆失败，请检查用户名密码是否正确','',{
                         confirmButtonText: '确定',
                         callback:action => {
                         }
@@ -149,7 +150,6 @@ export default {
                     emulateJSON : true
                 }
             ).then(function (res) {
-                console.log('777',res.data)
                 if(res.data.code == 200){
                     that.$alert('注册成功！','',{
                         confirmButtonText: '确定',
