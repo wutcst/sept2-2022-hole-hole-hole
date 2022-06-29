@@ -4,6 +4,7 @@ import cn.lkpttxg.sept2.worldofzuul.bean.ResponseData;
 import cn.lkpttxg.sept2.worldofzuul.bean.ResultGenerator;
 import cn.lkpttxg.sept2.worldofzuul.settings.entity.user.User;
 import cn.lkpttxg.sept2.worldofzuul.settings.service.user.UserService;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -40,17 +41,18 @@ public class UserController{
         @ApiResponse(code = 404,message = "请求的路径没有或者页面跳转路径不对")
     })
     @PostMapping("/login")
-    public ResponseData login(String username, String password){
+    public ResponseData<Player> login(String username, String password){
         String passwordMd5 = DigestUtils.md5DigestAsHex((password).getBytes());
-        User user = userService.login(username, passwordMd5);
-        if(user == null){
+        Player player = userService.login(username, passwordMd5);
+        if(player == null){
             return ResultGenerator.genFailResult("用户名或密码错误！");
         }else{
-            return ResultGenerator.genSuccessResult();
+            player.convertJson();
+            return ResultGenerator.genSuccessResult("登陆成功！", player);
         }
     }
 
-    @ApiOperation(value = "用户登录", notes = "用户登录接口")
+    @ApiOperation(value = "用户注册", notes = "用户注册接口")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "username", value = "用户名",
             required = true,paramType = "body", dataType = "String"),
@@ -69,7 +71,7 @@ public class UserController{
     public ResponseData register(String username, String playerName, String email, String password){
         String passwordMd5 = DigestUtils.md5DigestAsHex((password).getBytes());
         if(userService.register(username, playerName, email, passwordMd5)){
-            return ResultGenerator.genSuccessResult();
+            return ResultGenerator.genSuccessResult("注册成功！");
         }else{
             return ResultGenerator.genFailResult("存在同名用户！");
         }

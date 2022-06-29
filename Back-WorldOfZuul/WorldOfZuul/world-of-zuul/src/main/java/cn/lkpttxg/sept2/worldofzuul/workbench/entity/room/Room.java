@@ -228,8 +228,11 @@ public class Room implements Serializable {
    * @return 获取的物品
    */
   public Item getItem(Integer location){
-    Item item = (Item)objects[location];
-    objects[location] = null;
+    Item item = null;
+    if(objects[location] instanceof Item) {
+      item = (Item) objects[location];
+    }
+    objects[location] = new NullObject();
     return item;
   }
 

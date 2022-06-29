@@ -5,6 +5,8 @@ import cn.lkpttxg.sept2.worldofzuul.bean.ResultGenerator;
 import cn.lkpttxg.sept2.worldofzuul.common.consts.ActionResult;
 import cn.lkpttxg.sept2.worldofzuul.common.enums.resultCode.ResultCode;
 import cn.lkpttxg.sept2.worldofzuul.workbench.core.Game;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Food;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
 import cn.lkpttxg.sept2.worldofzuul.workbench.service.player.PlayerService;
 import io.swagger.annotations.Api;
@@ -46,6 +48,8 @@ public class PlayerController {
   private PlayerService playerService;
   @Resource
   private Game game;
+  @Resource
+  private RoomService roomService;
 
   /**
    * 玩家拾取物品controller.
@@ -70,12 +74,16 @@ public class PlayerController {
       Integer location) {
     Player player = game.getPlayer(playerId);
     Integer result = playerService.pick(player, location);
+    Item item = player.getCurrentRoom().getItem(location);
     if (result.equals(ActionResult.MISS)) {
       return ResultGenerator.genOtherResult(ResultCode.FAIL, "此位置没有物品！");
     } else if (result.equals(ActionResult.OVERWEIGHT)) {
-      return ResultGenerator.genFailResult("拾取失败，超重！");
+      return ResultGenerator.genFailResult("你当前能够负重：" + player.getWeight() +
+         " 物品重量为：" + item.getWeight() +
+          " 拾取失败，超重！");
     } else {
-      return ResultGenerator.genSuccessResult(player);
+      player.convertJson();
+      return ResultGenerator.genSuccessResult("成功拾取" + item.getName(), player);
     }
   }
 
@@ -99,8 +107,14 @@ public class PlayerController {
   public ResponseData<Player> throwAway(@PathVariable(value = "playerId") String playerId,
       String id) {
     Player player = game.getPlayer(playerId);
+    Item item = player.getItem(id);
+    if(item == null){
+      return ResultGenerator.genFailResult("背包中不存在此物品！");
+    }
     playerService.throwAway(player, id);
-    return ResultGenerator.genSuccessResult(player);
+    player.convertJson();
+    return ResultGenerator.genSuccessResult("成功丢弃" + item.getName()
+        + " 你当前负重为：" + player.getWeight(), player);
   }
 
   /**
@@ -124,11 +138,16 @@ public class PlayerController {
   public ResponseData<Player> eat(@PathVariable(value = "playerId") String playerId,
       String id) {
     Player player = game.getPlayer(playerId);
+    Item item = player.getItem(id);
+    if(item == null){
+      return ResultGenerator.genFailResult("背包中不存在此物品！");
+    }
     Integer result = playerService.eat(player, id);
     if (result.equals(ActionResult.UNMATCH)) {
-      return ResultGenerator.genFailResult("物品不能吃！");
+      return ResultGenerator.genFailResult("你居然想吃" + item.getName() + "!???");
     } else {
-      return ResultGenerator.genSuccessResult(player);
+      player.convertJson();
+      return ResultGenerator.genSuccessResult("你成功吃了" + item.getName(), player);
     }
   }
 
@@ -153,20 +172,18 @@ public class PlayerController {
   public ResponseData<Player> equip(@PathVariable(value = "playerId") String playerId,
       String id) {
     Player player = game.getPlayer(playerId);
+    Item item = player.getItem(id);
+    if(item == null){
+      return ResultGenerator.genFailResult("背包中不存在此物品！");
+    }
     Integer result = playerService.equipWeapon(player, id);
     if (result.equals(ActionResult.UNMATCH)) {
       return ResultGenerator.genFailResult("此物品无法装备！");
     } else {
-      return ResultGenerator.genSuccessResult(player);
+      player.convertJson();
+      return ResultGenerator.genSuccessResult("成功装备" + item.getName(), player);
     }
   }
-
-    /*@Resource
-    private PlayerService playerService;*/
-    @Resource
-    private Game game;
-    @Resource
-    private RoomService roomService;
 
     @ApiOperation(value = "根据玩家Id获取玩家信息")
     @ApiImplicitParams({
