@@ -70,6 +70,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.addItem(nowWeapon);
         player.setAttack(player.getAttack() - nowWeapon.getWeaponAttack());
       }
+      player.setWeapon(weapon);
       player.setAttack(player.getAttack() + weapon.getWeaponAttack());
       return ActionResult.SUCCESS;
     }
