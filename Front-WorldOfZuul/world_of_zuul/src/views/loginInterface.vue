@@ -1,6 +1,6 @@
 <template>
 <div class="login-bg" id="login">
-    <div class="background">    
+    <div class="background">
         <img :src="require(`../assets/background1.png`)" height="100%" width="100%" alt="" />
     </div>
     <div class="login-form" >
@@ -24,10 +24,10 @@
         center>
         <el-form :model="reform" ref="reform" :rules="rules" class="register_form" label-width="70px">
             <el-form-item label="用户名" style="margin-left:145px" prop="re_account">
-                <el-input v-model="reform.re_account" style="width: 175px;"></el-input>  
+                <el-input v-model="reform.re_account" style="width: 175px;"></el-input>
             </el-form-item>
             <el-form-item label="玩家昵称" style="margin-left:145px" prop="re_id">
-                <el-input v-model="reform.re_id" style="width: 175px;"></el-input>  
+                <el-input v-model="reform.re_id" style="width: 175px;"></el-input>
             </el-form-item>
             <el-form-item label="电子邮箱" style="margin-left:145px" prop="re_email">
                 <el-input v-model="reform.re_email" style="width: 175px;"></el-input>
@@ -97,7 +97,7 @@ export default {
             }
             var that = this;
             this.isLoging = true;
-            
+
             this.$http.post('http://lkpttxg.cn/worldOfZuul/users/login',
             {
                 "username":this.account,
@@ -109,6 +109,8 @@ export default {
             ).then(function(res) {
                 if(res.data.code == 200){
                     setTimeout(function(){
+                        that.account = '',
+                        that.password = '',
                         that.isLoging = false;
                         that.$router.push({
                             name:'home',
@@ -167,7 +169,7 @@ export default {
             })
         }
     }
-    
+
 }
 </script>
 
@@ -180,7 +182,7 @@ export default {
 
 .background{
     width:100%;
-    height:100%;  
+    height:100%;
     z-index:-1;
     position: absolute;
 }
@@ -205,7 +207,7 @@ export default {
 .login-form .el-button{
     background-color:transparent;
     border-style:none;
-    color: white; 
+    color: white;
     font-family: "ziti";
     font-size: 25px;
 }
