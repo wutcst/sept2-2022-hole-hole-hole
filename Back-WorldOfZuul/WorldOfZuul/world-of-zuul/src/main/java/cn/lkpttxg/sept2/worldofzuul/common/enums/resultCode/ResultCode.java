@@ -7,6 +7,8 @@ package cn.lkpttxg.sept2.worldofzuul.common.enums.resultCode;
 public enum ResultCode {
     //成功
     SUCCESS(200),
+    //没死
+    CONTINUE(201),
     //获得传送房间
     MIDDLE(300),
     //失败
