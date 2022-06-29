@@ -69,7 +69,7 @@
     </el-dialog>
 
     <el-aside width="400px">
-      <div style="font-family: ziti;font-size: 20px"class = "name">name:{{player_name}}</div>
+      <div style="font-family: ziti;font-size: 20px" class = "name">name:{{player_name}}</div>
       <div style="display: flex">
         <div class="health" style="margin-right: 150px; margin-left: 10px;font-family: ziti;font-size: 20px">血量:{{health}}</div>
         <div style="font-family: ziti;font-size: 20px" class="weight">剩余负重:{{weight}}KG</div>
@@ -79,7 +79,7 @@
         <div v-if="weapon !== null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">装备:{{weapon.name}}</div>
         <div v-if="weapon == null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">装备:{{weapon}}</div>
         <div v-if="weapon !== null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">耐久:{{weapon.durable}}</div>
-        <div v-if="weapon == null"class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">耐久:{{weapon}}</div>
+        <div v-if="weapon == null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">耐久:{{weapon}}</div>
         <div style="font-family: ziti;font-size: 20px" class="weapon">攻击:{{attack}}</div>
       </div>
       <div style="font-family: ziti;font-size: 20px" class="bag">我的背包</div>
@@ -135,6 +135,7 @@
       </el-footer>
     </el-container>
   </el-container>
+  <audio autoplay="autoplay" controls="controls" loop="loop" preload="auto" src="../assets/home.mp3"></audio>
   </div>
 </template>
 
