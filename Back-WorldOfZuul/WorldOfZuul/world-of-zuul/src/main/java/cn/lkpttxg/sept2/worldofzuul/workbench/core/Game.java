@@ -36,7 +36,6 @@ public class Game {
      */
     public Player addPlayer(Player player){
         players.put(player.getId(),player);
-        player.setCurrentRoom(gameMap.getInitRoom());
         return player;
     }
 
