@@ -1,5 +1,6 @@
 package cn.lkpttxg.sept2.worldofzuul.workbench.service.player.impl;
 
+import cn.lkpttxg.sept2.worldofzuul.common.consts.ActionResult;
 import cn.lkpttxg.sept2.worldofzuul.common.consts.RoomID;
 import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.FoodTypes;
 import cn.lkpttxg.sept2.worldofzuul.workbench.core.Game;
@@ -19,25 +20,24 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PlayerServiceImpl implements PlayerService {
-  @Resource
-  private Game game;
 
   @Override
-  public boolean pick(String playerId, String id, Integer location){
-    Player player = game.getPlayer(playerId);
-    Item item = player.getCurrentRoom().getItem(id, location);
+  public Integer pick(Player player, Integer location){
+    Item item = player.getCurrentRoom().getItem(location);
+    if(item == null){
+      return ActionResult.MISS;
+    }
     int weight = player.getWeight() - item.getWeight();
     if(weight < 0){
-      return false;
+      return ActionResult.OVERWEIGHT;
     }
     player.addItem(item);
     player.setWeight(weight);
-    return true;
+    return ActionResult.SUCCESS;
   }
 
   @Override
-  public void throwAway(String playerId, String id){
-    Player player = game.getPlayer(playerId);
+  public void throwAway(Player player, String id){
     Item item = player.getItem(id);
     if(item != null){
       player.setWeight(player.getWeight() + item.getWeight());
@@ -46,8 +46,7 @@ public class PlayerServiceImpl implements PlayerService {
   }
 
   @Override
-  public boolean eat(String playerId, String id){
-    Player player = game.getPlayer(playerId);
+  public Integer eat(Player player, String id){
     Item item = player.getItem(id);
     if(item instanceof Food){
       Food food = (Food)item;
@@ -55,14 +54,13 @@ public class PlayerServiceImpl implements PlayerService {
       player.setAttack(player.getAttack() + food.getAddAttack());
       player.setHealth(player.getHealth() + food.getAddHealth());
       player.deleteItem(id);
-      return true;
+      return ActionResult.SUCCESS;
     }
-    return false;
+    return ActionResult.UNMATCH;
   }
 
   @Override
-  public boolean equipWeapon(String playerId, String id) {
-    Player player = game.getPlayer(playerId);
+  public Integer equipWeapon(Player player, String id) {
     Item item = player.getItem(id);
     if(item instanceof Weapon){
       Weapon weapon = (Weapon)item;
@@ -72,8 +70,8 @@ public class PlayerServiceImpl implements PlayerService {
         player.setAttack(player.getAttack() - nowWeapon.getWeaponAttack());
       }
       player.setAttack(player.getAttack() + weapon.getWeaponAttack());
-      return true;
+      return ActionResult.SUCCESS;
     }
-    return false;
+    return ActionResult.UNMATCH;
   }
 }

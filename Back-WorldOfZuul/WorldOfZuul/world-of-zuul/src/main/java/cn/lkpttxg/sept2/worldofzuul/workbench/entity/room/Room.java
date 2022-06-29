@@ -220,11 +220,10 @@ public class Room implements Serializable {
   /**
    * TODO 拿房间指定位置的物品
    *
-   * @param id 物品id
    * @param location 物品坐标
    * @return 获取的物品
    */
-  public Item getItem(String id, Integer location){
+  public Item getItem(Integer location){
     Item item = (Item)objects[location];
     objects[location] = null;
     return item;
