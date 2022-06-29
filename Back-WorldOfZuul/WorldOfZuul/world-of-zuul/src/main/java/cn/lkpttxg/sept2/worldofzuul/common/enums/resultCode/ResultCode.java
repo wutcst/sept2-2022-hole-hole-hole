@@ -23,6 +23,8 @@ public enum ResultCode {
     STATE_ERROR(406),
     //服务器内部错误
     INTERNAL_SERVER_ERROR(500),
+    //玩家死亡
+    PLAYER_DIED(501),
     //参数错误
     PARAMETER_ERROR(10001),
     //账号错误

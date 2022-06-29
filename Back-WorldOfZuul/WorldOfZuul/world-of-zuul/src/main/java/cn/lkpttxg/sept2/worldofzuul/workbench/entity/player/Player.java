@@ -1,12 +1,16 @@
 package cn.lkpttxg.sept2.worldofzuul.workbench.entity.player;
 
+import cn.lkpttxg.sept2.worldofzuul.bean.ItemAndNumber;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.Item;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Weapon;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
+import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +23,6 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Player implements Serializable{
 
@@ -44,6 +47,10 @@ public class Player implements Serializable{
    * 玩家背包
    */
   private HashMap<Item, Integer> bag;
+  /**
+   * 玩家背包的数组
+   */
+  private ArrayList<ItemAndNumber> arrBag;
   /**
    * 玩家当前房间
    */
@@ -77,5 +84,18 @@ public class Player implements Serializable{
   public Player(String id, String name){
     this.id = id;
     this.name = name;
+  }
+
+  public Player(){
+      this.bag = new HashMap<>();
+      this.arrBag = new ArrayList<>();
+      this.oldRooms = new Stack<>();
+  }
+
+  public void convertJson(){
+    this.arrBag.clear();
+    for(Map.Entry<Item, Integer> entry : this.bag.entrySet()){
+          this.arrBag.add(new ItemAndNumber(entry.getKey(),entry.getValue()));
+    }
   }
 }
