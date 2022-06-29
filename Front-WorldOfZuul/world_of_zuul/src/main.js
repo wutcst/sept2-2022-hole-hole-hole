@@ -24,7 +24,7 @@ new Vue({
             // }else{
             //     this.$router.push('/home');
             // }
-            this.$router.push('/index');
+           // this.$router.push('/index');
         }
     }
 
