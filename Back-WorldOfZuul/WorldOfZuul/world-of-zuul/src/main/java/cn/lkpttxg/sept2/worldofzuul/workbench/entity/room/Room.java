@@ -229,8 +229,8 @@ public class Room implements Serializable {
    */
   public Item getItem(Integer location){
     Item item = null;
-    if(objects[location] instanceof Item){
-      item = (Item)objects[location];
+    if(objects[location] instanceof Item) {
+      item = (Item) objects[location];
     }
     objects[location] = new NullObject();
     return item;

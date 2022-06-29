@@ -29,7 +29,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
     int weight = player.getWeight() - item.getWeight();
     if(weight < 0){
-      player.getCurrentRoom().addItem(item,location);
+      player.getCurrentRoom().addItem(item, location);
       return ActionResult.OVERWEIGHT;
     }
     player.addItem(item);

@@ -8,6 +8,8 @@ import cn.lkpttxg.sept2.worldofzuul.settings.service.user.UserService;
 import cn.lkpttxg.sept2.worldofzuul.workbench.core.Game;
 import cn.lkpttxg.sept2.worldofzuul.workbench.dao.PlayerDao;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
+import java.util.Stack;
 import javax.annotation.Resource;
 
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
@@ -37,10 +39,9 @@ public class UserServiceImpl implements UserService {
    */
   @Override
   public Player login(String username, String password) {
-
     User user = userDao.selectUserByPasswordAndUsername(username, password);
     Player player = null;
-    if(user!=null){
+    if(user != null) {
       player = playerDao.getPlayerById(user.getPlayerId());
       String roomId = player.getCurrentRoom().getId();
       player.setCurrentRoom(game.getGameMap().getRoomById(roomId));
@@ -66,7 +67,6 @@ public class UserServiceImpl implements UserService {
     }
     String playerId = UUIDUtil.getUUID();
     user = new User(null, playerId, password, username, email);
-
     Player player = new Player();
     player.setId(playerId);
     player.setName(playerName);

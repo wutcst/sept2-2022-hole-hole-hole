@@ -48,7 +48,7 @@ public class UserController{
             return ResultGenerator.genFailResult("用户名或密码错误！");
         }else{
             player.convertJson();
-            return ResultGenerator.genSuccessResult(player);
+            return ResultGenerator.genSuccessResult("登陆成功！", player);
         }
     }
 
@@ -71,7 +71,7 @@ public class UserController{
     public ResponseData register(String username, String playerName, String email, String password){
         String passwordMd5 = DigestUtils.md5DigestAsHex((password).getBytes());
         if(userService.register(username, playerName, email, passwordMd5)){
-            return ResultGenerator.genSuccessResult();
+            return ResultGenerator.genSuccessResult("注册成功！");
         }else{
             return ResultGenerator.genFailResult("存在同名用户！");
         }
