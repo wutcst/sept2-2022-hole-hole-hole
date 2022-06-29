@@ -11,12 +11,10 @@
             <el-form-item label="密码" class="item2" style="margin-top:40px;">
                 <el-input v-model="password" show-password style="width: 175px;"></el-input>
             </el-form-item>
-            <!-- <el-form-item> -->
-                <el-button plain type="primary" style="margin-left: 60px;margin-top: 20px;" @click="visible=true">注册
+                <el-button style="margin-left: 60px;margin-top: 20px;" @click="visible=true">注册
                 </el-button>
-                <el-button plain type="primary" @click="login">登录
+                <el-button @click="login">登录
                 </el-button>
-            <!-- </el-form-item> -->
         </el-form>
     </div>
     <el-dialog
@@ -93,10 +91,41 @@ export default {
 
         //登录请求
         toLogin(){
+            let loginparam = {
+                account: this.account,
+                password: this.password
+            }
+            var that = this;
             this.isLoging = true;
-            //登录请求
-            // this.isLoging = false;
-            this.$router.push('/home');
+            
+            this.$http.post('http://lkpttxg.cn/worldOfZuul/users/login',
+            {
+                "username":this.account,
+                "password":this.password
+            },
+            {
+                emulateJSON : true
+            }
+            ).then(function(res) {
+                if(res.data.code == 200){
+                    setTimeout(function(){
+                        that.isLoging = false;
+                        that.$router.push({
+                            name:'home',
+                            params:{
+                                player_id:res.data.data.id
+                            }
+                        });
+                    },1*1000)
+                }
+                if(res.data.code == 404){
+                    this.$alert('登陆失败，请检查用户名密码是否正确','',{
+                        confirmButtonText: '确定',
+                        callback:action => {
+                        }
+                    })
+                }
+            });
         },
 
         cancel(){
@@ -106,8 +135,36 @@ export default {
 
         //注册请求
         register(){
-            this.visible = false;
-            //注册请求
+            var that = this
+            this.$http.post('http://lkpttxg.cn/worldOfZuul/users/register',
+                {
+                    "username":this.reform.re_account,
+                    "playerName":this.reform.re_id,
+                    "email":this.reform.re_email,
+                    "password":this.reform.re_password
+                },
+                {
+                    emulateJSON : true
+                }
+            ).then(function (res) {
+                console.log('777',res.data)
+                if(res.data.code == 200){
+                    that.$alert('注册成功！','',{
+                        confirmButtonText: '确定',
+                        callback:action => {
+                            that.visible = false;
+                        }
+                    })
+                }
+                if(res.data.message == "存在同名用户！"){
+                    that.$alert('存在同名用户！','',{
+                        confirmButtonText: '确定',
+                        callback:action => {
+                            that.visible = false;
+                        }
+                    })
+                }
+            })
         }
     }
     
@@ -148,7 +205,7 @@ export default {
 .login-form .el-button{
     background-color:transparent;
     border-style:none;
-    color: white;
+    color: white; 
     font-family: "ziti";
     font-size: 25px;
 }

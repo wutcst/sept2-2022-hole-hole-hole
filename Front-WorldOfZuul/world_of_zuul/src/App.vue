@@ -3,22 +3,22 @@
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <div>
     <transition name="fade">
-<!--      <keep-alive>-->
-<!--        <router-view></router-view>-->
-<!--      </keep-alive>-->
-      <Home/>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </transition>
   </div>
 </template>
 
 <script>
 import Home from './components/Home.vue'
-//import loginInterface from './views/loginInterface.vue'
+import loginInterface from './views/loginInterface.vue'
 
 export default {
   name: 'App',
   components: {
-   Home
+   Home,
+   loginInterface
   },
   // data(){
   //   return {
