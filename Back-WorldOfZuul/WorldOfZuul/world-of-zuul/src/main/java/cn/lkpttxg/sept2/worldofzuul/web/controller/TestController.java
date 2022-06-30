@@ -3,6 +3,9 @@ package cn.lkpttxg.sept2.worldofzuul.web.controller;
 import cn.lkpttxg.sept2.worldofzuul.bean.ResponseData;
 import cn.lkpttxg.sept2.worldofzuul.bean.ResultGenerator;
 import cn.lkpttxg.sept2.worldofzuul.common.enums.room.RoomTypes;
+import cn.lkpttxg.sept2.worldofzuul.workbench.core.Game;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.item.items.Food;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.monster.Monster;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +33,7 @@ public class TestController {
             @ApiResponse(code = 404,message = "请求的路径没有或者页面跳转路径不对")
     })
     @GetMapping("/test")
-    public ResponseData<Room> exportEntBaseInfo(@RequestParam(value = "username", required = false) String username) {
+    public ResponseData<Monster> exportEntBaseInfo(@RequestParam(value = "username", required = false) String username) {
         Room room = new Room(RoomTypes.FOREST);
         return ResultGenerator.genSuccessResult(room);
     }

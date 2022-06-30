@@ -1,6 +1,6 @@
 <template>
 <div class="login-bg" id="login">
-    <div class="background">    
+    <div class="background">
         <img :src="require(`../assets/background1.png`)" height="100%" width="100%" alt="" />
     </div>
     <div class="login-form" >
@@ -11,12 +11,10 @@
             <el-form-item label="密码" class="item2" style="margin-top:40px;">
                 <el-input v-model="password" show-password style="width: 175px;"></el-input>
             </el-form-item>
-            <!-- <el-form-item> -->
-                <el-button plain type="primary" style="margin-left: 60px;margin-top: 20px;" @click="visible=true">注册
+                <el-button style="margin-left: 60px;margin-top: 20px;" @click="visible=true">注册
                 </el-button>
-                <el-button plain type="primary" @click="login">登录
+                <el-button @click="login">登录
                 </el-button>
-            <!-- </el-form-item> -->
         </el-form>
     </div>
     <el-dialog
@@ -26,10 +24,10 @@
         center>
         <el-form :model="reform" ref="reform" :rules="rules" class="register_form" label-width="70px">
             <el-form-item label="用户名" style="margin-left:145px" prop="re_account">
-                <el-input v-model="reform.re_account" style="width: 175px;"></el-input>  
+                <el-input v-model="reform.re_account" style="width: 175px;"></el-input>
             </el-form-item>
             <el-form-item label="玩家昵称" style="margin-left:145px" prop="re_id">
-                <el-input v-model="reform.re_id" style="width: 175px;"></el-input>  
+                <el-input v-model="reform.re_id" style="width: 175px;"></el-input>
             </el-form-item>
             <el-form-item label="电子邮箱" style="margin-left:145px" prop="re_email">
                 <el-input v-model="reform.re_email" style="width: 175px;"></el-input>
@@ -43,8 +41,8 @@
             <el-button type="primary" @click="register">确 定</el-button>
         </span>
     </el-dialog>
-    <Loading v-if="isLoging" marginTop="-10%" style="margin-left: 750px;"></Loading>
-    <audio autoplay="autoplay" controls="controls" loop="loop" preload="auto" src="../assets/back.mp3"></audio>
+    <Loading v-if="isLoging" marginTop="-10%" style="margin-left: 47%;"></Loading>
+    <audio autoplay="autoplay" controls="controls" loop="loop" preload="auto" src="../assets/index.mp3"></audio>
 </div>
 </template>
 
@@ -93,10 +91,44 @@ export default {
 
         //登录请求
         toLogin(){
+            let loginparam = {
+                account: this.account,
+                password: this.password
+            }
+            var that = this;
             this.isLoging = true;
-            //登录请求
-            // this.isLoging = false;
-            this.$router.push('/home');
+
+            this.$http.post('http://lkpttxg.cn/worldOfZuul/users/login',
+            {
+                "username":this.account,
+                "password":this.password
+            },
+            {
+                emulateJSON : true
+            }
+            ).then(function(res) {
+                if(res.data.code == 200){
+                    setTimeout(function(){
+                        that.account = '',
+                        that.password = '',
+                        that.isLoging = false;
+                        that.$router.push({
+                            name:'home',
+                            params:{
+                                player_id:res.data.data.id
+                            }
+                        });
+                    },1*1000)
+                }
+                if(res.data.code == 404){
+                    that.isLoging = false;
+                    that.$alert('登陆失败，请检查用户名密码是否正确','',{
+                        confirmButtonText: '确定',
+                        callback:action => {
+                        }
+                    })
+                }
+            });
         },
 
         cancel(){
@@ -106,11 +138,38 @@ export default {
 
         //注册请求
         register(){
-            this.visible = false;
-            //注册请求
+            var that = this
+            this.$http.post('http://lkpttxg.cn/worldOfZuul/users/register',
+                {
+                    "username":this.reform.re_account,
+                    "playerName":this.reform.re_id,
+                    "email":this.reform.re_email,
+                    "password":this.reform.re_password
+                },
+                {
+                    emulateJSON : true
+                }
+            ).then(function (res) {
+                if(res.data.code == 200){
+                    that.$alert('注册成功！','',{
+                        confirmButtonText: '确定',
+                        callback:action => {
+                            that.visible = false;
+                        }
+                    })
+                }
+                if(res.data.message == "存在同名用户！"){
+                    that.$alert('存在同名用户！','',{
+                        confirmButtonText: '确定',
+                        callback:action => {
+                            that.visible = false;
+                        }
+                    })
+                }
+            })
         }
     }
-    
+
 }
 </script>
 
@@ -123,7 +182,7 @@ export default {
 
 .background{
     width:100%;
-    height:100%;  
+    height:100%;
     z-index:-1;
     position: absolute;
 }

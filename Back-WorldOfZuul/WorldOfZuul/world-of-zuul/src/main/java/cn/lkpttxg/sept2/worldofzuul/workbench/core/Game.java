@@ -36,7 +36,6 @@ public class Game {
      */
     public Player addPlayer(Player player){
         players.put(player.getId(),player);
-        player.setCurrentRoom(gameMap.getInitRoom());
         return player;
     }
 
@@ -46,8 +45,7 @@ public class Game {
      * @return
      */
     public Player removePlayer(Player player){
-        players.remove(player.getId());
-        return player;
+        return players.remove(player.getId());
     }
 
     public GameMap getGameMap() {
@@ -66,7 +64,14 @@ public class Game {
         this.players = players;
     }
 
-    public Player getPlayer(String userId){
-        return players.get(userId);
+
+    public Player getPlayer(String playerId){
+        return players.get(playerId);
     }
+
+    public void removeAllPlayer() {
+        players.clear();
+    }
+
+    //TODO:Save
 }

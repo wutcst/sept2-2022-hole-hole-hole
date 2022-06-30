@@ -1,5 +1,6 @@
 package cn.lkpttxg.sept2.worldofzuul.workbench.entity.room;
 
+import cn.lkpttxg.sept2.worldofzuul.bean.NullObject;
 import cn.lkpttxg.sept2.worldofzuul.common.consts.RoomDirection;
 import cn.lkpttxg.sept2.worldofzuul.common.consts.RoomType;
 import cn.lkpttxg.sept2.worldofzuul.common.enums.Item.FoodTypes;
@@ -92,7 +93,10 @@ public class Room implements Serializable {
   /**
    * 初始化房间内的物品位置
    */
-  private void initialRoom() {
+  public void initialRoom() {
+    for(int i = 0;i<25;i++){
+      this.objects[i] = new NullObject();
+    }
       //初始化物品
       //1.初始化食物
       int randomLocation1 =  CommonUtil.getRandomLocation();
@@ -135,7 +139,7 @@ public class Room implements Serializable {
    */
   @ApiModelProperty(value = "房间的长描述",example = "你发现自己在 XXX ")
   public String getLongDescription() {
-    return "你发现自己在 " + this.description + ".\n" + getItemsDescription() + getExitString();
+    return "你发现自己在 " + this.description + ".<br/>" + getItemsDescription() + getExitString();
   }
 
   /**
@@ -146,20 +150,20 @@ public class Room implements Serializable {
   @ApiModelProperty(value = "物品的描述信息",example = "这个地方啥都没有")
   public String getItemsDescription() {
     if (isEmpty()) {
-      return "这个地方啥都没有" + '\n';
+      return "这个地方啥都没有" + "<br/>";
     }
     StringBuilder s = new StringBuilder("");
     for (Object object : objects) {
       if(object instanceof Item) {
         Item item = (Item)object;
-        s.append(item.getName() + "\t" + item.getDescribe() + "\t" + item.getWeight() + "kg" + "\n");
+        s.append(item.getName() + "&emsp;" + item.getDescribe() + "&emsp;" + item.getWeight() + "kg" + "<br/>");
       }
       if(object instanceof Monster) {
         Monster monster = (Monster) object;
-        s.append(monster.getName() + "\t" + monster.getDescription() + "\t血量：" + monster.getHealth() + "\t攻击：" +monster.getAttack()+ "\n");
+        s.append(monster.getName() + "&emsp;" + monster.getDescription() + "&emsp;血量：" + monster.getHealth() + "&emsp;攻击：" +monster.getAttack()+ "<br/>");
       }
     }
-    return "这个地方有:\n" + s.toString();
+    return "这个地方有:<br/>" + s.toString();
   }
 
   /**
@@ -216,6 +220,36 @@ public class Room implements Serializable {
     }
     return null;
   }
+
+  /**
+   * 拿房间指定位置的物品
+   *
+   * @param location 物品坐标
+   * @return 获取的物品
+   */
+  public Item getItem(Integer location){
+    Item item = null;
+    if(objects[location] instanceof Item) {
+      item = (Item) objects[location];
+    }
+    objects[location] = new NullObject();
+    return item;
+  }
+
+  /**
+   * 查看指定位置的物品
+   *
+   * @param location 位置
+   * @return 指定位置的物品
+   */
+  public Item showItem(Integer location){
+    Item item = null;
+    if(objects[location] instanceof Item) {
+      item = (Item) objects[location];
+    }
+    return item;
+  }
+
   /**
    * 向房间中增加一个物品。
    *
@@ -294,4 +328,5 @@ public class Room implements Serializable {
   public void setObjects(Object[] objects) {
     this.objects = objects;
   }
+
 }

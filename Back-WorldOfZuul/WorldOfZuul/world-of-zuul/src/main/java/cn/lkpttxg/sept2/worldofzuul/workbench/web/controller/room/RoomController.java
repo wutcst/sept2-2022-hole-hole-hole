@@ -143,7 +143,7 @@ public class RoomController {
         return ResultGenerator.genSuccessResult(room.getExits());
     }
 
-    @ApiOperation(value = "获取人物刚进游戏的房间",notes = "如果是新玩家，则从初始房间ouside进入;如果是老玩家，则返回最后一次退出时所在的房间")
+    @ApiOperation(value = "获取人物目前所在游戏的房间",notes = "如果是新玩家，则从初始房间ouside进入;如果是老玩家，则返回最后一次退出时所在的房间")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "playId",value = "玩家id",paramType = "path",required = true,dataType = "String")
     })
@@ -158,10 +158,11 @@ public class RoomController {
         Player player = game.getPlayer(playId);
         if(player!=null){
             room = player.getCurrentRoom();
-            return ResultGenerator.genSuccessResult(game.getGameMap().getInitRoom());
+            return ResultGenerator.genSuccessResult(room);
         }else {
-            //return ResultGenerator.genFailResult("该玩家不存在");
-            return ResultGenerator.genSuccessResult(game.getGameMap().getInitRoom());
+            return ResultGenerator.genFailResult("该玩家不存在");
+
+            //return ResultGenerator.genSuccessResult(game.getGameMap().getInitRoom());
         }
     }
 

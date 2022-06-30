@@ -2,18 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-// import router from './router';
-// import store from './store'
+import router from './router';
+import store from './store'
 import VueResource from 'vue-resource'
 Vue.use(ElementUI);
 Vue.use(VueResource);
 Vue.config.productionTip = false;
 
 new Vue({
-    // store,
-    // router,
+    store,
+    router,
     render: h => h(App),
-
     created(){
         this.CheckLogin();
     },
@@ -24,7 +23,7 @@ new Vue({
             // }else{
             //     this.$router.push('/home');
             // }
-            this.$router.push('/index');
+           this.$router.push('/index');
         }
     }
 

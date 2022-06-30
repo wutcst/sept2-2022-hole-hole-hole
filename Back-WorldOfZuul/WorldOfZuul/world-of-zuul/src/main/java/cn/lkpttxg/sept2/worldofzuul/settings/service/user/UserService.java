@@ -1,6 +1,7 @@
-package cn.lkpttxg.sept2.worldofzuul.settings.service;
+package cn.lkpttxg.sept2.worldofzuul.settings.service.user;
 
 import cn.lkpttxg.sept2.worldofzuul.settings.entity.user.User;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +18,7 @@ public interface UserService {
    * @param password
    * @return 登录成功返回用户 登录失败返回null
    */
-  public User login(String username, String password);
+  public Player login(String username, String password);
 
   /**
    * 用户注册

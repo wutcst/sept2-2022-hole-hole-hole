@@ -3,9 +3,11 @@ package cn.lkpttxg.sept2.worldofzuul.workbench.entity.map;
 import cn.lkpttxg.sept2.worldofzuul.common.consts.RoomDirection;
 import cn.lkpttxg.sept2.worldofzuul.common.consts.RoomID;
 import cn.lkpttxg.sept2.worldofzuul.common.enums.room.RoomTypes;
+import cn.lkpttxg.sept2.worldofzuul.workbench.entity.player.Player;
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
 import org.springframework.stereotype.Component;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author TXG
@@ -89,5 +91,21 @@ public class GameMap {
      */
     public Room getNextRoom(String id, String diection) {
         return getRoomById(id).getExit(diection);
+    }
+
+    public void flush(HashMap<String, Player> players) {
+
+        for(Map.Entry<String,Room> roomEntry : this.rooms.entrySet() ){
+            boolean flag = true;
+            for(Map.Entry<String,Player> playerEntry : players.entrySet()){
+                if(playerEntry.getValue().getCurrentRoom().getId().equals(roomEntry.getKey())){
+                    flag = false;
+                }
+            }
+            if(flag){
+                roomEntry.getValue().initialRoom();
+            }
+        }
+
     }
 }
