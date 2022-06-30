@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Stack;
 
 import cn.lkpttxg.sept2.worldofzuul.workbench.entity.room.Room;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +27,7 @@ import lombok.NoArgsConstructor;
  * @author PpxiA
  * @version 1.0
  */
+@ApiModel(description = "玩家信息")
 @Data
 @AllArgsConstructor
 public class Player implements Serializable{
@@ -33,50 +36,62 @@ public class Player implements Serializable{
   /**
    * 玩家id
    */
+  @ApiModelProperty(value = "玩家唯一id",dataType = "String")
   private String id;
   /**
    * 玩家名字
    */
+  @ApiModelProperty(value = "玩家名",dataType = "String")
   private String name;
   /**
    * 玩家金钱
    */
+  @ApiModelProperty(value = "玩家金钱",dataType = "Integer")
   private Integer money = 0;
   /**
    * 玩家负重量
    */
+  @ApiModelProperty(value = "玩家负重",dataType = "Integer")
   private Integer weight = 10;
   /**
    * 玩家背包
    */
+  @ApiModelProperty(value = "玩家背包")
   private HashMap<Item, Integer> bag;
   /**
    * 玩家背包的数组
    */
+  @ApiModelProperty(value = "玩家背包Json")
   private ArrayList<ItemAndNumber> arrBag;
   /**
    * 玩家当前房间
    */
+  @ApiModelProperty(value = "玩家当前房间")
   private Room currentRoom;
   /**
    * 玩家历史房间
    */
+  @ApiModelProperty(value = "玩家历史房间")
   private Stack<Room> oldRooms;
   /**
    * 玩家当前横坐标
    */
+  @ApiModelProperty(value = "玩家当前位置")
   private Integer loc = 12;
   /**
    * 玩家当前持有的武器
    */
+  @ApiModelProperty(value = "玩家装备的武器")
   private Weapon weapon;
   /**
    * 玩家的攻击力
    */
+  @ApiModelProperty(value = "玩家的攻击")
   private Integer attack = 5;
   /**
    * 玩家的血量
    */
+  @ApiModelProperty(value = "玩家的血量")
   private Integer health = 100;
 
   /**
