@@ -69,22 +69,24 @@
     </el-dialog>
 
     <el-aside width="400px">
-      <div style="font-family: ziti;font-size: 20px" class = "name">name:{{player_name}}</div>
+      <div style="font-family: ziti;font-size: 20px;color: white" class = "name">name:{{player_name}}</div>
       <div style="display: flex">
-        <div class="health" style="margin-right: 150px; margin-left: 10px;font-family: ziti;font-size: 20px">血量:{{health}}</div>
-        <div style="font-family: ziti;font-size: 20px" class="weight">剩余负重:{{weight}}KG</div>
+        <div class="health" style="margin-right: 50px; margin-left: 10px;font-family: ziti;font-size: 20px;color: white">血量:{{health}}</div>
+        <div class="money" style="margin-right: 52px; font-family: ziti;font-size: 20px;color: white">金钱:{{money}}</div>
+        <div style="font-family: ziti;font-size: 20px;color: white" class="weight">剩余负重:{{weight}}KG</div>
       </div>
       <div style="display: flex">
-        <div class="money" style="margin-right: 20px; margin-left: 10px;font-family: ziti;font-size: 20px">金钱:{{money}}</div>
-        <div v-if="weapon !== null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">装备:{{weapon.name}}</div>
-        <div v-if="weapon == null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">装备:{{weapon}}</div>
-        <div v-if="weapon !== null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">耐久:{{weapon.durable}}</div>
-        <div v-if="weapon == null" class="weapon" style="margin-right: 20px;font-family: ziti;font-size: 20px">耐久:{{weapon}}</div>
-        <div style="font-family: ziti;font-size: 20px" class="weapon">攻击:{{attack}}</div>
+        <div v-if="weapon !== null" class="weapon" style="margin-right: 50px; margin-left: 10px; font-family: ziti;font-size: 20px;color: white">装备:{{weapon.name}}</div>
+        <div v-if="weapon == null" class="weapon" style="margin-right: 50px;  margin-left: 10px; font-family: ziti;font-size: 20px;color: white">装备:未装备武器</div>
       </div>
-      <div style="font-family: ziti;font-size: 20px" class="bag">我的背包</div>
-      <div class="table_container">
-        <el-table  border height="500"  :data="bag_data" >
+      <div style="display: flex">
+        <div v-if="weapon !== null" class="weapon" style="margin-right: 50px; margin-left: 10px;font-family: ziti;font-size: 20px;color: white">耐久:{{weapon.durable}}</div>
+        <div v-if="weapon == null" class="weapon" style="margin-right: 50px; margin-left: 10px;font-family: ziti;font-size: 20px;color: white">耐久:未装备武器</div>
+        <div style="font-family: ziti;font-size: 20px;color: white" class="weapon">攻击:{{attack}}</div>
+      </div>
+      <div style="font-family: ziti;font-size: 20px;color: white" class="bag">我的背包</div>
+      <div class="table_container" >
+        <el-table  border height="400"  :data="bag_data" >
           <el-table-column prop="item.name" label="物品" align="center" width = "79"></el-table-column>
 <!--          <el-table-column prop="weight" label="重量" align="center" width = "99"></el-table-column>-->
 <!--          <el-table-column prop="num" label="数量" align="center" width = "99"></el-table-column>-->
@@ -104,7 +106,7 @@
         </el-table>
       </div>
     </el-aside>
-    <el-container direction="vertical">
+    <el-container class="map" direction="vertical">
       <el-header>
         <span style="margin: auto;font-family: ziti ;font-size: 50px">当前房间:{{room_name}}</span>
         <el-button type="primary" style="margin: auto 10px " @click = "handleReturn">返回上一间房间</el-button>
@@ -115,17 +117,17 @@
       <el-main>
         <div class="left">
           <div class="cover" v-for="(item,index) in datalist" :id="index" @click="handleClick($event)">
-            <img v-if=" index === 2||index === 10||index === 14||index === 22"  :src="require(`../assets/2.png`)" width="100%" height="100%" alt=" " >
+            <img  v-if=" index === 2||index === 10||index === 14||index === 22"  :src="require(`../assets/2.png`)" width="100%" height="100%" opacity="0.0" alt=" " >
             <img v-else :src="require(`../assets/${item.id}.png`)" width="100%" height="100%" alt=" " >
           </div>
         </div >
         <div class="right">
           <div class="right_up">
-            <div style="font-family: ziti;font-size: 20px" v-html="longDescription"></div>
+            <div style="font-family: ziti;font-size: 20px;color:white " v-html="longDescription"></div>
           </div>
           <div class="right_down">
-            <div style="font-family: ziti;font-size: 20px">提示</div>
-            <div style="font-family: ziti;font-size: 20px" v-html="message"></div>
+            <div style="font-family: ziti;font-size: 20px;color:white">提示</div>
+            <div style="font-family: ziti;font-size: 20px;color:white" v-html="message"></div>
           </div>
         </div>
 
@@ -500,7 +502,7 @@ export default {
     },
     save(){
       var that=this
-      this.$http.get("http://lkpttxg.cn:80/worldOfZuul//settings/save"+"?id="+that.player_id,{
+      this.$http.get("http://lkpttxg.cn:80/worldOfZuul/settings/save"+"?id="+that.player_id,{
         emulateJSON: true
       }).then(function (res) {
         console.log("成功",res.data)
@@ -514,7 +516,7 @@ export default {
     },
     flush(){
       var that=this
-      this.$http.get("http://lkpttxg.cn:80/worldOfZuul//settings/flush",{
+      this.$http.get("http://lkpttxg.cn:80/worldOfZuul/settings/flush",{
         emulateJSON: true
       }).then(function (res) {
         console.log("成功",res.data)
@@ -527,6 +529,18 @@ export default {
       })
     },
     quit(){
+      var that=this
+      this.$http.get("http://lkpttxg.cn:80/worldOfZuul/player/quit/"+that.player_id,{
+        emulateJSON: true
+      }).then(function (res) {
+        console.log("成功",res.data)
+        if (res.data.code === 200){
+          that.message = res.data.message
+        }
+        else {
+          that.message = res.data.message
+        }
+      })
       this.$router.replace('/index')
     },
     goNext(id , direction){
@@ -537,7 +551,7 @@ export default {
       }).then(function (res) {
         setTimeout(function () {
           that.isLoading = false
-        },0.5*1000)
+        },0.3*1000)
         console.log("去往下一个房间成功",res.data)
         if (res.data.code === 200){
           that.message = res.data.message
@@ -597,11 +611,10 @@ export default {
 
 .el-aside {
   background-color: #D3DCE6;
-  /*background-image: url("../assets/player_info_bcg.png");*/
   color: #333;
   text-align: center;
   line-height: 50px;
-
+  background-image: url("../assets/background.png");
 
 }
 
@@ -611,6 +624,7 @@ export default {
   text-align: center;
   /*line-height: 160px;*/
   display: flex;
+  background-image: url("../assets/background.png");
 }
 .left{
   display: grid;
@@ -618,15 +632,38 @@ export default {
   grid-template-rows: repeat(5, 110px);
   justify-items: stretch;
 }
+
 .cover{
-  border:1px solid #000;
+  border:1px solid white;
 }
-/*.cover{*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  width: 33%;*/
-/*  border:1px solid #000*/
-/*}*/
+
+.table_container /deep/  .el-table, .el-table__expanded-cell {
+  background-color: transparent;
+}
+
+.table_container /deep/ .el-table tr {
+  background-color: transparent!important;
+  color: white;
+}
+
+.table_container /deep/ .el-table__header th{
+  background-color: transparent!important;
+  color: white;
+}
+
+.table_container /deep/  .el-table--enable-row-transition .el-table__body td, .el-table .cell{
+  background-color: transparent;
+  color: white;
+}
+.el-table::before {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0px;
+}
+.table_container /deep/ .el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: transparent !important;
+}
 .right{
   width:50%;
   height: 500px;
@@ -634,17 +671,15 @@ export default {
   /*line-height: 50px;*/
 }
 .right_up{
-  /*width:40%;*/
-  /*display: flex;*/
   height: 50%;
-  border:1px solid #000;
+  border:1px solid white;
   margin-bottom: 50px;
 }
 .right_down{
   /*width:40%;*/
   /*display: flex;*/
   height: 50%;
-  border:1px solid #000;
+  border:1px solid white;
 }
 
 body > .el-container {
