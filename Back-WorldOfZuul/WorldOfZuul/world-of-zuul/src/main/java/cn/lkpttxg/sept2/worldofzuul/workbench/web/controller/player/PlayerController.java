@@ -269,7 +269,7 @@ public class PlayerController {
             @ApiResponse(code = 500,message = "玩家死亡，游戏结束"),
     })
     @GetMapping("/attack/{id}")
-    public ResponseData<Player> getBackRoom(@PathVariable(value = "id") String id,@RequestParam(value = "location") int location) {
+    public ResponseData<Player> attackMonster(@PathVariable(value = "id") String id,@RequestParam(value = "location") int location) {
         Player player = game.getPlayer(id);
         String message = "";
         if (player == null) {
@@ -338,7 +338,7 @@ public class PlayerController {
             @ApiImplicitParam(name = "id",value = "玩家Id",required = true,paramType = "path",dataType = "String")
     })
     @ApiResponses({
-            @ApiResponse(code = 200,message = "成功信息，保存成功"),
+            @ApiResponse(code = 200,message = "成功信息，退出成功"),
             @ApiResponse(code = 404,message = "玩家id错误，无该退出")
     })
     @GetMapping("/quit/{id}")
