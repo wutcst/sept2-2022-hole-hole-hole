@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 
 /**
  * @author TXG
@@ -66,18 +65,6 @@ public class SettingController {
     public ResponseData allQuit(){
         game.removeAllPlayer();
         return ResultGenerator.genSuccessResult("成功");
-    }
-
-
-    @ApiOperation(value = "查看所有在线玩家")
-    @ApiResponses({
-            @ApiResponse(code = 200,message = "查询成功"),
-            @ApiResponse(code = 404,message = "查询失败")
-    })
-    @GetMapping("/query")
-    public ResponseData queryPlayers(){
-        HashMap<String,Player> players =  game.getPlayers();
-        return ResultGenerator.genSuccessResult(players);
     }
 
 
